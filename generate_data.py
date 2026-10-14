@@ -47,6 +47,7 @@ def wb_indicator(code):
         if page >= data[0]["pages"]: return vals
         page += 1
 
+LLG = {}
 IDX = {}  # nom normalisé -> iso3 (pour rapprocher passport.csv)
 ALIAS = {"türkiye":"Turkey","russian federation":"Russia","congo (rep.)":"Republic of the Congo","congo (dem. rep.)":"DR Congo",
  "cape verde islands":"Cape Verde","comoro islands":"Comoros","naoero":"Nauru","palau islands":"Palau","the gambia":"Gambia",
@@ -59,8 +60,8 @@ def norm(s):
     return re.sub(r"[^a-z0-9]", "", re.sub(r"^the ", "", s))
 
 def names():
-    d = get("https://restcountries.com/v3.1/all?fields=cca3,name,translations,altSpellings")
-    for c in d: IDX[norm(c["name"]["common"])] = c["cca3"]
+    d = get("https://restcountries.com/v3.1/all?fields=cca3,name,translations,altSpellings,latlng")
+    for c in d: IDX[norm(c["name"]["common"])] = c["cca3"]; LLG[c["cca3"]] = c.get("latlng")
     for c in d:
         for n in [c["name"]["official"]] + c.get("altSpellings", []): IDX.setdefault(norm(n), c["cca3"])
     return {c["cca3"]: ((c["translations"].get("fra") or {}).get("common"), c["name"]["common"],
@@ -102,7 +103,7 @@ def build(countries, series, nm):
         r = [rk.get(iso3) for rk in ranks]
         if sum(x is not None for x in r) >= min(MIN_CATS_PER_COUNTRY, len(cats)):
             fr, e, es = nm.get(iso3, (None, None, None))
-            rows.append({"n": fr or en, "e": e or en, "s": es or fr or en, "f": flag(iso2), "r": r})
+            rows.append({"n": fr or en, "e": e or en, "s": es or fr or en, "f": flag(iso2), "ll": LLG.get(iso3), "r": r})
     return {"generated": datetime.date.today().isoformat(), "source": "World Bank", "cats": cats, "countries": rows}
 
 if __name__ == "__main__":
