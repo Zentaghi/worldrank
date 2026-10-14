@@ -2,104 +2,118 @@
 <html lang="fr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>WorldRank</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#eef1fb;--card:#fff;--tx:#161a2b;--mu:#6b7090;--ac:#3b5bdb;--bd:#dfe3f0;--gold:#d9a100;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101a3a;--card:#17254d;--tx:#eef0fa;--mu:#9aa6d0;--ac:#7c93ff;--bd:#2a3a6e;--gold:#fbc531;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#101a3a;--card:#17254d;--tx:#eef0fa;--mu:#9aa6d0;--ac:#7c93ff;--bd:#2a3a6e;--gold:#fbc531;color-scheme:dark}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%}
-body{background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;transition:background .3s}
-body.daily{background:linear-gradient(#5b8fe0,#1f4aa8);color:#fff}
-body.free{background:linear-gradient(#9b5fc7,#8d4fbd);color:#fff}
+:root{--bg:#eef1fb;--card:#fff;--tx:#161a2b;--mu:#6b7090;--ac:#5b6cff;--ac2:#9b5cff;--bd:#dfe3f0;--gold:#d9a100;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1230;--card:#141c40;--tx:#eef0fa;--mu:#9aa6d0;--ac:#8097ff;--bd:#27315f;--gold:#fbc531;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b1230;--card:#141c40;--tx:#eef0fa;--mu:#9aa6d0;--ac:#8097ff;--bd:#27315f;--gold:#fbc531;color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;min-height:100%}
+body{font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--tx);transition:background .4s}
 main{max-width:480px;margin:0 auto;padding:14px}
-h1{font-size:26px;margin:2px 0}h1 span{color:var(--ac)}
-.mu{color:var(--mu);font-size:14px}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;margin:12px 0}
-.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-.btn{display:block;width:100%;padding:14px;border-radius:14px;font-weight:700;margin:8px 0;background:var(--ac);color:#fff}
-.btn.s{background:transparent;border:1px solid var(--bd);color:var(--tx)}
-.wk{display:flex;justify-content:space-between;margin:8px 0}
-.d{width:34px;height:34px;border-radius:50%;border:2px solid var(--bd);display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--mu)}
-.d.on{background:var(--ac);color:#fff;border-color:var(--ac)}.d.td{border-color:var(--ac);color:var(--tx)}
-.perf{font-size:44px;font-weight:800;color:var(--gold);text-align:right;line-height:1}
-.log div{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bd);font-size:15px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;transition:transform .12s,opacity .2s}button:active{transform:scale(.96)}
+body.home{--card:#141c40;--tx:#eef0fa;--mu:#9aa6d0;--bd:#27315f;--ac:#8097ff;--gold:#fbc531;color:var(--tx);padding-bottom:92px;background:radial-gradient(800px 420px at 0 -5%,#3b4fe0aa,transparent 60%),radial-gradient(600px 420px at 100% 0,#8a2be2aa,transparent 55%),#0b1230 fixed}
+body.daily{background:linear-gradient(#5b8fe0,#1f4aa8) fixed;color:#fff}body.weekly{background:linear-gradient(#e0928a,#a8506a) fixed;color:#fff}
+body.free{background:linear-gradient(#9b5fc7,#6d3fb3) fixed;color:#fff}body.blitz{background:linear-gradient(#f5a04f,#d4551f) fixed;color:#fff}
+body.duel{background:linear-gradient(#3fb8b0,#1f6f8c) fixed;color:#fff}body.foot{background:linear-gradient(#2fb868,#0e6b3a) fixed;color:#fff}
+.mu{color:var(--mu);font-size:13px}.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.glass{background:#ffffff12;border:1px solid #ffffff1f;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:24px;padding:16px;margin:14px 0;box-shadow:0 8px 30px #0004}
+.glass>b.h{letter-spacing:2px;font-size:12px;color:var(--mu)}
+.hd{display:flex;justify-content:space-between;align-items:center;padding:4px 2px}
+.brand{display:flex;align-items:center;gap:10px}.mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#5b6cff,#9b5cff);display:grid;place-items:center;font-size:24px;box-shadow:0 6px 18px #5b6cff77}
+h1{font-size:26px;margin:0;font-weight:800;letter-spacing:-.5px}h1 span{background:linear-gradient(90deg,#8097ff,#c58bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rg{width:52px;height:52px;border-radius:50%;background:conic-gradient(#8097ff var(--p),#27315f 0);display:grid;place-items:center;position:relative}
+.rg::before{content:"";position:absolute;inset:4px;background:#141c40;border-radius:50%}.rg em{position:relative;font-style:normal;font-size:22px}
+.rg i{position:absolute;right:-4px;bottom:-4px;background:#fbc531;color:#222;border-radius:10px;font-style:normal;font-size:11px;font-weight:800;padding:1px 6px}
+.btn{display:block;width:100%;padding:14px;border-radius:16px;font-weight:700;margin:8px 0;color:#fff;background:linear-gradient(135deg,var(--ac),var(--ac2));box-shadow:0 8px 20px #5b6cff55}
+.btn.s{background:#ffffff14;box-shadow:none;border:1px solid #ffffff26}.btn.l{background:#dbe7ff;color:#14234d;box-shadow:none}
+.wk{display:flex;gap:6px;flex:1;justify-content:space-between;margin-left:12px}
+.d{width:34px;height:34px;border-radius:50%;border:2px solid #ffffff30;display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--mu)}
+.d.on{background:linear-gradient(135deg,#5b6cff,#9b5cff);border-color:transparent;color:#fff}.d.td{border-color:#8097ff;color:var(--tx)}
+.dq{background:linear-gradient(160deg,#1c2f66,#16224d);border:1px solid #8097ff77;border-radius:20px;padding:14px;margin-top:10px}
+.perf{font-size:46px;font-weight:800;color:var(--gold);text-align:right;line-height:1;text-shadow:0 0 20px #fbc53155}
+.wkc{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#c97b78,#a8506a);border-radius:20px;padding:14px;margin-top:10px;width:100%;text-align:left;color:#fff}
+.wkc>span:first-child{font-size:26px;background:#fff3;border-radius:14px;padding:6px 8px}.wkc div{flex:1;font-size:14px}.wkc small{opacity:.85}
+.tg{display:flex;background:#0a1230;border-radius:14px;padding:4px;gap:4px}.tg button{padding:7px 11px;border-radius:10px;color:var(--mu);font-weight:600;font-size:13px}.tg button.on{background:linear-gradient(135deg,#5b6cff,#9b5cff);color:#fff}.tg.wide{margin-bottom:10px}.tg.wide button{flex:1;padding:8px 2px;font-size:12px}
+.tls{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.tl{background:#ffffff12;border:1px solid #ffffff1a;border-radius:18px;padding:12px 2px;font-size:26px;display:flex;flex-direction:column;align-items:center;gap:2px}.tl small{font-size:12px;font-weight:700}
+.tl.on{background:var(--b);border-color:#fff8;box-shadow:0 8px 20px #0005}.tl.pl{border:2px dashed #ffffff30;color:var(--mu)}
+.mc{background:#0a1230aa;border-radius:18px;padding:14px}.bar{height:12px;border-radius:8px;background:#1d2a50;margin:10px 0}.bar i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#c68a4b,#f0b46a)}
+.go{background:linear-gradient(135deg,#2f5bea,#5b6cff);color:#fff;font-weight:800;border-radius:14px;padding:11px 16px;box-shadow:0 6px 16px #2f5bea66}
+.nv{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:460px;margin:0 auto;display:flex;background:#0a1230d9;backdrop-filter:blur(14px);border:1px solid #ffffff1f;border-radius:24px;padding:8px 4px;z-index:5}
+.nv button{flex:1;display:flex;flex-direction:column;align-items:center;color:var(--mu)}.nv b{font-size:20px}.nv span{font-size:11px;font-weight:700}.nv .on{color:#fbc531}
+.log div{display:flex;justify-content:space-between;align-items:center;padding:8px 4px;border-bottom:1px solid #ffffff14;font-size:14px}.log .me{background:#8097ff22;border-radius:10px}
+.av{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.av button{font-size:24px;width:44px;height:44px;border-radius:14px;background:#ffffff12}.av .on{outline:2px solid #8097ff}
+.pf{display:flex;align-items:center;gap:14px}.pf .big{font-size:44px;width:70px;height:70px;border-radius:22px;background:linear-gradient(135deg,#5b6cff,#9b5cff);display:grid;place-items:center}
 /* game */
 .top{display:flex;align-items:center;gap:10px}
-.back{width:40px;height:40px;border-radius:50%;background:#fff;color:#222;font-size:20px;flex:none}
-.tot{flex:1;text-align:center}.tot small{letter-spacing:3px;font-size:12px;opacity:.8}
-.tot b{display:block;font-size:46px;color:#fbc531;line-height:1.1}
-.dots{display:flex;justify-content:center;gap:6px;align-items:center;font-size:13px}
-.dots i{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.25)}
-.dots i.cur{background:#fff}
-.gc{background:#fff;color:#1b2033;border-radius:26px;padding:14px;margin-top:14px}
-.cn{background:#eff2f9;border-radius:22px;padding:12px;text-align:center;position:relative}
-.cn .f{font-size:64px;line-height:1.1}.cn .n{font-weight:800;letter-spacing:1px;margin-top:2px}
-.pass{position:absolute;right:8px;top:8px;width:64px;background:#fff;border-radius:14px;font-size:11px;font-weight:800;padding:8px 2px;box-shadow:0 4px 12px #0002;color:#222}
-.pass b{position:absolute;top:-8px;right:-8px;background:#fbc531;border-radius:50%;width:24px;height:24px;display:grid;place-items:center;font-size:13px}
-.pass:disabled{opacity:.35}
-.cat{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;background:#f4f6f8;border-radius:16px;padding:13px 14px;margin-top:9px;font-weight:800;font-size:15px;letter-spacing:.3px;color:#222}
-.cat.u{background:#c58bdc;color:#fff;border:2px solid #a45bc2}
-.daily .cat.u{background:#9ec1f2;border-color:#5b8fe0}
-.pill{display:flex;align-items:center;gap:8px;font-size:22px}
-.pill b{background:rgba(255,255,255,.4);border-radius:10px;padding:2px 12px;font-size:16px;border-right:5px solid var(--c)}
-.tools{display:flex;gap:8px}.tools button{width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.2);font-size:18px}
-
-body.home{--card:#15264e;--tx:#eef0fa;--mu:#9aa6d0;--ac:#7c93ff;--bd:#2a3a6e;--gold:#fbc531;background:linear-gradient(#22346e,#17234d) fixed;color:var(--tx);min-height:100vh;padding-bottom:84px}
-body.weekly{background:linear-gradient(#d98a84,#b05a6b);color:#fff}
-body.blitz{background:linear-gradient(#f0954a,#d4602a);color:#fff}
-.weekly .cat.u{background:#e7b0ab;border-color:#c46f76}.blitz .cat.u{background:#f6c08f;border-color:#e0813f}
-.hd{display:flex;justify-content:space-between;align-items:center}
-.rg{width:56px;height:56px;border-radius:50%;background:conic-gradient(var(--ac) var(--p),var(--bd) 0);display:grid;place-items:center;position:relative}
-.rg::before{content:"";position:absolute;inset:5px;background:#17234d;border-radius:50%}
-.rg small,.rg b{position:relative;line-height:1;text-align:center}.rg small{font-size:7px;letter-spacing:1px;margin-top:8px}.rg b{font-size:20px;margin-top:-14px}
-.sec{border:1px solid var(--bd);border-radius:20px;padding:14px;margin:12px 0}
-.sec>b{letter-spacing:2px;font-size:13px;color:var(--mu)}
-.dq{background:#172a52;border:1px solid var(--ac);border-radius:18px;padding:14px;margin-top:10px}
-.wkc{display:flex;align-items:center;gap:12px;background:#bf7470;border-radius:18px;padding:14px;margin-top:10px;width:100%;text-align:left;color:#fff}
-.wkc>span:first-child{font-size:28px;background:#fff3;border-radius:12px;padding:6px}.wkc div{flex:1}.wkc small{opacity:.85}
-.tg{display:flex;background:#0e1a3d;border-radius:14px;padding:4px;gap:4px}.tg button{padding:8px 12px;border-radius:10px;color:var(--mu);font-weight:600;font-size:14px}.tg button.on{background:#2f5bea;color:#fff}
-.tls{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
-.tl{background:#2a3558;border-radius:16px;padding:14px 4px;font-size:26px;display:flex;flex-direction:column;align-items:center;gap:4px}.tl small{font-size:13px;font-weight:700}
-.tl.on{outline:3px solid #c9b2ff;background:var(--b)}.tl.pl{background:none;border:2px dashed var(--bd);color:var(--mu)}
-.mc{background:#0d1633;border-radius:16px;padding:14px}.bar{height:12px;border-radius:8px;background:#1d2a50;margin:10px 0}.bar i{display:block;height:100%;border-radius:8px;background:#c68a4b}
-.go{background:#2f5bea;color:#fff;font-weight:800;border-radius:12px;padding:12px 18px}
-.nv{position:fixed;left:0;right:0;bottom:0;display:flex;background:#0b1230;padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px));z-index:5}
-.nv button{flex:1;display:flex;flex-direction:column;align-items:center;font-size:20px;color:var(--mu)}.nv span{font-size:12px;font-weight:700}.nv .on{color:#fbc531}
-.lg{width:62px;height:62px;border-radius:16px;background:#fff3;display:grid;place-items:center;font-size:36px;position:relative;flex:none}
-.lg em{position:absolute;bottom:-6px;font-style:normal;font-size:8px;font-weight:800;background:#7b2fe0;border-radius:8px;padding:2px 6px;letter-spacing:.5px}
-.tools{flex-direction:column}.tools button{width:34px;height:34px}
-.tb{height:8px;background:#fff3;border-radius:6px;margin-top:10px}.tb i{display:block;height:100%;width:100%;background:#fbc531;border-radius:6px}
-.ts{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:#000c;color:#fff;padding:10px 16px;border-radius:20px;font-size:14px;z-index:9;max-width:85%;text-align:center}
-
-body.duel{background:linear-gradient(#3fb8b0,#1f7a8c);color:#fff}.duel .cat.u{background:#8fd6cf;border-color:#2aa198}
+.back{width:40px;height:40px;border-radius:50%;background:#fff;color:#222;font-size:20px;flex:none;box-shadow:0 4px 12px #0003}
+.lg{width:62px;height:62px;border-radius:18px;background:#ffffff33;display:grid;place-items:center;font-size:34px;position:relative;flex:none;border:1px solid #fff5}
+.lg em{position:absolute;bottom:-7px;font-style:normal;font-size:8px;font-weight:800;background:#7b2fe0;border-radius:8px;padding:2px 7px;letter-spacing:.5px}
+.tot{flex:1;text-align:center}.tot small{letter-spacing:3px;font-size:11px;opacity:.85}.tot b{display:block;font-size:48px;color:#fbc531;line-height:1.05;text-shadow:0 0 24px #fbc53166}
+.dots{display:flex;justify-content:center;gap:6px;align-items:center;font-size:12px}.dots i{width:13px;height:13px;border-radius:50%;background:#ffffff40}.dots i.cur{background:#fff;box-shadow:0 0 8px #fff}
+.tools{display:flex;flex-direction:column;gap:6px}.tools button{width:34px;height:34px;border-radius:12px;background:#ffffff33;font-size:16px}
+.gc{background:#fff;color:#1b2033;border-radius:30px;padding:14px;margin-top:16px;box-shadow:0 20px 50px #0004}
+.cn{background:linear-gradient(#f3f6fd,#e9eefb);border-radius:24px;padding:14px;text-align:center;position:relative}
+.cn .f{font-size:68px;line-height:1.1;filter:drop-shadow(0 6px 8px #0003)}.cn .n{font-weight:800;letter-spacing:1px;margin-top:2px}
+.pass{position:absolute;right:8px;top:8px;width:62px;background:#fff;border-radius:16px;font-size:10px;font-weight:800;padding:8px 2px;box-shadow:0 6px 14px #0003;color:#222}
+.pass b{position:absolute;top:-8px;right:-8px;background:#fbc531;border-radius:50%;width:24px;height:24px;display:grid;place-items:center;font-size:13px}.pass:disabled{opacity:.35}
+.cat{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;background:#f4f6fa;border-radius:18px;padding:14px;margin-top:9px;font-weight:700;font-size:14px;letter-spacing:.2px;color:#222}
+.cat:hover:not(:disabled){background:#e9edfb}.cat.u{color:#fff;background:#c58bdc;border:2px solid #a45bc2}
+.daily .cat.u{background:#7fa9ec;border-color:#4d80d6}.weekly .cat.u{background:#e2a6a1;border-color:#c46f76}.blitz .cat.u{background:#f2b07a;border-color:#e0813f}.duel .cat.u{background:#7fcfc7;border-color:#2aa198}.foot .cat.u{background:#6fcf97;border-color:#27a05b}
+.pill{display:flex;align-items:center;gap:8px;font-size:22px}.pill b{background:#ffffff66;border-radius:10px;padding:2px 12px;font-size:16px;border-right:5px solid var(--c)}
+.tb{height:8px;background:#fff3;border-radius:6px;margin-top:12px}.tb i{display:block;height:100%;width:100%;background:#fbc531;border-radius:6px}
+.rv{position:absolute;inset:0;display:grid;place-items:center;font-size:60px;font-weight:900;background:#eef2fbee;border-radius:24px;animation:pop .35s}
 @keyframes pop{50%{transform:scale(1.25)}}@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
-.pop{animation:pop .4s}.cat.u.new{animation:pop .4s}
-.rv{position:absolute;inset:0;display:grid;place-items:center;font-size:58px;font-weight:900;background:#eff2f9ee;border-radius:22px;animation:pop .35s}
+.pop,.cat.u.new{animation:pop .4s}
 .cf{position:fixed;top:-30px;font-style:normal;font-size:24px;z-index:20;animation:fall 2.4s linear forwards;pointer-events:none}
-.ov{position:fixed;inset:0;background:#000a;display:grid;place-items:center;z-index:30;padding:20px}
-.md{background:#17254d;color:#eef0fa;border-radius:22px;padding:20px;max-width:380px}.md h2{margin:0 0 8px}.md p{margin:8px 0}
-.gr{display:inline-grid;place-items:center;width:64px;height:64px;border-radius:18px;background:#fbc531;color:#222;font-size:38px;font-weight:900}
-.cmp div{font-size:13px}.cmp small{color:#667}
+.gr{display:grid;place-items:center;width:64px;height:64px;border-radius:20px;background:#fbc531;color:#222;font-size:38px;font-weight:900;box-shadow:0 8px 20px #0004}
+.ov{position:fixed;inset:0;background:#000b;display:grid;place-items:center;z-index:30;padding:20px}
+.md{background:#141c40;color:#eef0fa;border-radius:24px;padding:22px;max-width:380px;border:1px solid #ffffff22}.md h2{margin:0 0 8px}.md p{margin:8px 0;font-size:14px}
+.ts{position:fixed;left:50%;bottom:110px;transform:translateX(-50%);background:#000d;color:#fff;padding:10px 16px;border-radius:20px;font-size:14px;z-index:40;max-width:85%;text-align:center}
 </style></head><body><main id="app"></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
 <script>
-let CATS=["👥 Population","🗺️ Superficie","💰 PIB","❤️ Espérance de vie","💵 PIB/habitant","📊 Dév. humain","🏙️ Densité","✈️ Tourisme"];
+/* ===== CONFIG : colle ici les clés de ton projet Supabase (voir README) ===== */
+const SB_URL="",SB_KEY="";
+/* ===== i18n ===== */
+const LANGS=["fr","en","es"];
+const T={home:"Accueil|Home|Inicio",ranks:"Rangs|Ranks|Rangos",duels:"Duels|Duels|Duelos",profile:"Profil|Profile|Perfil",lvl:"NIVEAU|LEVEL|NIVEL",chal:"DÉFIS|CHALLENGES|RETOS",same:"Le même plateau pour tous|Same board for everyone|El mismo tablero para todos",daily:"Défi quotidien|Daily challenge|Reto diario",again:"Recommencer<br>le défi du jour|Replay<br>today's challenge|Repite<br>el reto de hoy",playd:"Jouer au défi|Play the challenge|Jugar el reto",redo:"Recommencer le défi|Restart challenge|Reiniciar reto",perfect:"Score parfait|Perfect score|Puntuación perfecta",line:"{n} pays · 8 choix · {p} {w}|{n} countries · 8 picks · {p} {w}|{n} países · 8 elecciones · {p} {w}",passw:"passe|pass|pase",passes:"passes|passes|pases",best:"meilleur|best|mejor",nextin:"Prochain défi dans|Next challenge in|Próximo reto en",weekly:"Hebdo|Weekly|Semanal",week:"Semaine|Week|Semana",weeksub:"Plateau de la semaine|This week's board|Tablero de la semana",orig:"JEUX ORIGINAUX|ORIGINAL GAMES|JUEGOS ORIGINALES",normal:"Normal|Normal|Normal",easy:"Facile|Easy|Fácil",classic:"Classique|Classic|Clásico",blitz:"Éclair|Blitz|Rayo",foot:"Football|Football|Fútbol",more:"Plus|More|Más",soon:"Bientôt !|Coming soon!|¡Pronto!",random:"Plateau aléatoire|Random board|Tablero aleatorio",secs:"8 secondes par pays|8 seconds per country|8 segundos por país",footd:"Nations du football|Football nations|Selecciones de fútbol",playb:"JOUER|PLAY|JUGAR",total:"TOTAL|TOTAL|TOTAL",pass:"PASSER|PASS|PASAR",final:"SCORE FINAL|FINAL SCORE|PUNTUACIÓN FINAL",gap:"écart|gap|diferencia",bb:"Voir le meilleur plateau|See the best board|Ver el mejor tablero",you:"Toi|You|Tú",ideal:"idéal|ideal|ideal",share:"Partager mon score|Share my score|Compartir mi puntuación",copied:"Copié !|Copied!|¡Copiado!",replay:"Rejouer|Play again|Jugar de nuevo",howt:"Comment jouer ?|How to play?|¿Cómo jugar?",h1:"Un pays apparaît.|A country appears.|Aparece un país.",h2:"Choisis une catégorie : son rang mondial devient tes points.|Pick a category: its world rank becomes your points.|Elige una categoría: su ranking mundial son tus puntos.",h3:"Chaque catégorie ne sert qu'une fois : garde les plus « dures » pour les pays qui y sont mal classés.|Each category can be used once: save the toughest ones for countries that rank badly in them.|Cada categoría se usa una sola vez: guarda las más duras para los países que quedan mal en ellas.",h4:"Tu peux passer un pays. Vise le score le plus bas !|You can pass a country. Aim for the lowest score!|Puedes pasar un país. ¡Busca la puntuación más baja!",go:"C'est parti|Let's go|¡Vamos!",dt:"DUELS ENTRE AMIS|FRIEND DUELS|DUELOS CON AMIGOS",dp:"Crée un plateau et partage le code : ton ami joue exactement les mêmes pays.|Create a board and share the code: your friend plays the exact same countries.|Crea un tablero y comparte el código: tu amigo juega los mismos países.",nd:"Créer un duel|Create a duel|Crear un duelo",jd:"Rejoindre avec un code|Join with a code|Unirse con un código",dc:"Code du duel :|Duel code:|Código del duelo:",today:"Aujourd'hui|Today|Hoy",alltime:"Tous temps|All time|Siempre",nob:"Classement mondial non configuré (voir README).|World leaderboard not configured (see README).|Ranking mundial no configurado (ver README).",need:"Connecte-toi (onglet Profil) pour apparaître au classement mondial.|Sign in (Profile tab) to appear on the world leaderboard.|Inicia sesión (pestaña Perfil) para aparecer en el ranking mundial.",none:"Aucun score.|No scores yet.|Aún no hay puntuaciones.",lg:"Continuer avec Google|Continue with Google|Continuar con Google",la:"Continuer avec Apple|Continue with Apple|Continuar con Apple",out:"Se déconnecter|Sign out|Cerrar sesión",user:"Pseudo|Username|Usuario",games:"Parties|Games|Partidas",rec:"Records|Records|Récords",snd:"Sons|Sounds|Sonidos",vib:"Vibrations|Vibration|Vibración",lang:"Langue|Language|Idioma",reset:"Réinitialiser mes données|Reset my data|Restablecer mis datos",demo:"Mode démo : {n} pays, rangs approximatifs.|Demo mode: {n} countries, approximate ranks.|Modo demo: {n} países, rangos aproximados.",real:"{n} pays · {c} catégories · données World Bank.|{n} countries · {c} categories · World Bank data.|{n} países · {c} categorías · datos del Banco Mundial.",up:"Temps écoulé !|Time's up!|¡Se acabó el tiempo!",beat:"Fais mieux !|Beat me!|¡Supérame!",beatd:"Bats-moi avec le code {c} !|Beat me with code {c}!|¡Supérame con el código {c}!",sc:"Score|Score|Puntos",par:"parfait|perfect|perfecto",gd:"note|grade|nota",g0:"Parfait !|Perfect!|¡Perfecto!",g1:"Excellent|Excellent|Excelente",g2:"Très bien|Very good|Muy bien",g3:"Pas mal|Not bad|No está mal",g4:"À retenter|Try again|Inténtalo de nuevo",m_daily:"QUOTIDIEN|DAILY|DIARIO",m_weekly:"HEBDO|WEEKLY|SEMANAL",m_free:"CLASSIQUE|CLASSIC|CLÁSICO",m_blitz:"ÉCLAIR|BLITZ|RAYO",m_duel:"DUEL|DUEL|DUELO",m_foot:"FOOT|FOOTBALL|FÚTBOL",conn:"Connexion impossible.|Sign-in failed.|No se pudo iniciar sesión.",saved:"Enregistré|Saved|Guardado",guest:"Joueur|Player|Jugador",lvlw:"Niveau|Level|Nivel"};
+const CT={"Population":"Population|Población","Superficie":"Area|Superficie","PIB":"GDP|PIB","Espérance de vie":"Life expectancy|Esperanza de vida","PIB/habitant":"GDP per capita|PIB per cápita","Dév. humain":"Human development|Desarrollo humano","Densité":"Density|Densidad","Tourisme":"Tourism|Turismo","Minuscule":"Tiny|Diminuto","Militaire":"Military|Militar","Dette publique":"Public debt|Deuda pública","Pire passeport":"Worst passport|Peor pasaporte","Classement FIFA":"FIFA ranking|Ranking FIFA","Coupes du monde":"World Cups|Mundiales","Participations CdM":"World Cup appearances|Participaciones mundialistas","Buts en CdM":"World Cup goals|Goles en Mundiales","Finales perdues":"Lost finals|Finales perdidas","FIFA féminin":"Women's FIFA|FIFA femenino","Valeur effectif":"Squad value|Valor de plantilla","Matchs en CdM":"World Cup matches|Partidos mundialistas","Forêts":"Forests|Bosques","Émissions CO₂":"CO₂ emissions|Emisiones de CO₂","Fécondité":"Fertility|Fecundidad","Mortalité infantile":"Infant mortality|Mortalidad infantil","Urbanisation":"Urbanization|Urbanización","Terres agricoles":"Farmland|Tierras agrícolas","Exportations":"Exports|Exportaciones","Chômage":"Unemployment|Desempleo","Alphabétisation":"Literacy|Alfabetización","Immigration":"Immigration|Inmigración","Plus de 65 ans":"Over 65|Mayores de 65","Inflation":"Inflation|Inflación"};
+function ls(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
+let lang="fr",LI=0;function setLang(l){lang=l;LI=LANGS.indexOf(l);ls("wr_lang",l);document.documentElement.lang=l}
+setLang(ls("wr_lang")||(LANGS.includes((navigator.language||"").slice(0,2))?navigator.language.slice(0,2):"en"));
+const t=(k,o)=>{const a=(T[k]||k).split("|");let s=a[LI]||a[0];if(o)for(const x in o)s=s.replace("{"+x+"}",o[x]);return s};
+function cn(n){const i=n.indexOf(" "),x=n.slice(i+1),v=CT[x];return n.slice(0,i)+" "+(LI&&v?v.split("|")[LI-1]:x)}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>"&#"+c.charCodeAt(0)+";");
+const ALT={};const nm=n=>(ALT[n]&&ALT[n][lang])||n;
+/* ===== DONNÉES DÉMO (12 catégories, ~68 pays, rangs mondiaux approximatifs) ===== */
+let CATS=["👥 Population","🗺️ Superficie","💰 PIB","❤️ Espérance de vie","💵 PIB/habitant","📊 Dév. humain","🏙️ Densité","✈️ Tourisme","🔬 Minuscule","🎖️ Militaire","🏦 Dette publique","🛂 Pire passeport"];
 let D=[["France","🇫🇷",23,43,7,17,24],["États-Unis","🇺🇸",3,3,1,48,8],["Chine","🇨🇳",2,4,2,55,70],["Inde","🇮🇳",1,7,5,130,140],["Indonésie","🇮🇩",4,14,16,115,105],["Pakistan","🇵🇰",5,33,40,140,150],["Nigeria","🇳🇬",6,32,35,185,155],["Brésil","🇧🇷",7,5,9,95,80],["Bangladesh","🇧🇩",8,94,33,105,135],["Russie","🇷🇺",9,1,11,110,65],["Mexique","🇲🇽",10,13,14,100,70],["Japon","🇯🇵",12,62,4,1,35],["Éthiopie","🇪🇹",13,27,55,150,180],["Philippines","🇵🇭",14,73,35,125,125],["Égypte","🇪🇬",15,30,37,105,115],["RD Congo","🇨🇩",16,11,90,175,195],["Vietnam","🇻🇳",17,66,34,85,105],["Iran","🇮🇷",18,17,40,90,85],["Turquie","🇹🇷",19,37,18,75,70],["Allemagne","🇩🇪",20,63,3,32,17],["Thaïlande","🇹🇭",21,51,27,70,85],["Royaume-Uni","🇬🇧",22,79,6,33,24],["Afrique du Sud","🇿🇦",24,24,38,165,100],["Italie","🇮🇹",25,71,8,10,30],["Kenya","🇰🇪",28,48,62,140,150],["Corée du Sud","🇰🇷",29,109,12,8,30],["Colombie","🇨🇴",30,26,38,85,95],["Espagne","🇪🇸",31,52,15,5,31],["Argentine","🇦🇷",32,8,22,85,65],["Algérie","🇩🇿",34,10,55,90,100],["Soudan","🇸🇩",35,15,100,160,185],["Ukraine","🇺🇦",36,45,55,135,120],["Canada","🇨🇦",38,2,10,20,20],["Maroc","🇲🇦",39,57,58,105,120],["Pologne","🇵🇱",40,69,21,55,50],["Arabie saoudite","🇸🇦",41,12,19,60,40],["Pérou","🇵🇪",44,19,49,90,90],["Venezuela","🇻🇪",47,33,70,130,120],["Australie","🇦🇺",55,6,13,9,14],["Niger","🇳🇪",62,22,140,165,195],["Mali","🇲🇱",60,24,130,175,180],["Chili","🇨🇱",63,38,45,40,55],["Kazakhstan","🇰🇿",64,9,55,115,60],["Tchad","🇹🇩",70,21,150,190,190],["Pays-Bas","🇳🇱",71,135,17,22,11],["Cuba","🇨🇺",80,105,70,70,100],["Bolivie","🇧🇴",80,28,90,130,130],["Belgique","🇧🇪",82,140,24,28,15],["Suède","🇸🇪",90,55,25,13,16],["Grèce","🇬🇷",90,96,55,30,50],["Portugal","🇵🇹",88,111,50,24,40],["Émirats arabes unis","🇦🇪",92,114,30,50,10],["Autriche","🇦🇹",98,112,28,22,13],["Israël","🇮🇱",98,150,29,11,19],["Suisse","🇨🇭",100,134,20,6,4],["Danemark","🇩🇰",112,130,37,28,8],["Libye","🇱🇾",108,17,90,120,90],["Singapour","🇸🇬",115,190,36,2,5],["Finlande","🇫🇮",117,65,45,33,18],["Norvège","🇳🇴",118,67,30,11,6],["Irlande","🇮🇪",123,120,30,25,2],["Nouvelle-Zélande","🇳🇿",123,75,50,25,25],["Mongolie","🇲🇳",135,18,120,125,100],["Qatar","🇶🇦",140,160,55,50,3],["Luxembourg","🇱🇺",165,175,70,28,1],["Islande","🇮🇸",170,108,100,7,7],["Malte","🇲🇹",170,190,130,15,38],["Maldives","🇲🇻",175,187,150,90,70]];
 const E=[[28,85,1],[20,175,3],[75,80,12],[134,33,40],[112,90,45],[164,60,100],[161,65,130],[89,185,55],[129,8,120],[56,215,17],[77,130,6],[24,40,11],[176,110,120],[113,35,60],[105,125,25],[179,160,170],[107,45,40],[78,140,70],[45,100,4],[7,50,8],[66,90,7],[15,45,10],[110,155,30],[30,55,5],[146,80,80],[19,25,20],[83,155,60],[27,115,2],[48,200,55],[91,190,90],[170,185,150],[100,120,35],[18,225,18],[120,120,25],[36,85,20],[40,195,15],[87,180,65],[119,160,150],[10,235,40],[189,190,170],[185,200,150],[44,170,70],[67,220,70],[187,195,190],[11,28,14],[85,100,60],[118,215,120],[14,30,22],[5,180,40],[33,120,13],[42,100,15],[17,105,16],[22,110,12],[25,25,50],[1,55,25],[4,70,35],[92,225,140],[9,2,30],[12,200,60],[2,205,55],[6,140,45],[16,185,60],[96,230,130],[43,90,55],[23,65,120],[3,235,55],[28,4,50],[87,10,70]];
-D.forEach((c,i)=>c.push(...E[i]));
+const X={mil:[8,1,2,4,25,28,50,17,55,3,30,10,80,50,35,90,37,20,18,7,33,6,36,12,70,9,32,16,45,22,85,11,14,29,15,5,52,60,13,120,100,40,62,110,19,75,90,27,26,24,38,21,41,17,23,31,88,28,34,25,69,65,140,39,99,150,145,130],
+debt:[30,20,50,52,130,40,150,28,120,175,85,3,90,80,40,140,110,140,120,90,70,32,62,9,60,95,65,18,38,100,8,10,25,70,100,150,140,50,115,125,105,125,170,100,105,45,75,22,140,5,15,160,60,70,110,150,150,6,55,170,135,125,80,165,155,85,75,20],
+pas:[184,162,89,45,74,4,21,155,8,107,143,196,15,68,31,21,31,10,105,184,84,175,104,184,74,196,124,184,153,45,15,131,168,74,175,98,130,108,168,43,41,156,84,37,184,48,82,184,195,179,179,196,179,152,179,184,14,199,184,184,184,168,62,105,184,162,179,100]};
+D.forEach((c,i)=>c.push(...E[i],Math.min(195,Math.max(1,196-c[3])),X.mil[i],X.debt[i],X.pas[i]));
 const ALL0=D,ALLC0=CATS;let ALL=ALL0,ALLC=ALLC0;
-const app=document.getElementById("app");let S={};
+/* ===== FOOTBALL (rangs calculés parmi 41 nations ; valeurs approximatives) ===== */
+const FALLC=["⚽ Classement FIFA","🏆 Coupes du monde","🌍 Participations CdM","🥅 Buts en CdM","🥈 Finales perdues","👩 FIFA féminin","💶 Valeur effectif","📅 Matchs en CdM"];
+const FV=[["Argentine","🇦🇷",1,3,18,152,3,30,900,88],["Espagne","🇪🇸",2,1,16,108,0,1,1100,67],["France","🇫🇷",3,2,16,136,2,5,1300,73],["Angleterre","🏴󠁧󠁢󠁥󠁮󠁧󠁿",4,1,16,104,0,4,1500,74],["Brésil","🇧🇷",5,5,22,237,2,7,1000,114],["Portugal","🇵🇹",6,0,8,43,0,25,950,35],["Pays-Bas","🇳🇱",7,0,11,96,3,8,800,55],["Belgique","🇧🇪",8,0,14,69,0,18,500,51],["Allemagne","🇩🇪",9,4,20,232,4,3,900,112],["Croatie","🇭🇷",10,0,6,43,1,50,350,30],["Italie","🇮🇹",11,4,18,128,2,12,800,83],["Maroc","🇲🇦",12,0,6,14,0,60,400,23],["Colombie","🇨🇴",13,0,6,27,0,25,350,21],["États-Unis","🇺🇸",14,0,11,37,0,2,400,37],["Mexique","🇲🇽",15,0,17,47,0,35,200,60],["Uruguay","🇺🇾",16,2,14,89,0,45,400,56],["Suisse","🇨🇭",17,0,12,45,0,20,400,41],["Japon","🇯🇵",18,0,7,17,0,6,300,28],["Sénégal","🇸🇳",19,0,3,13,0,70,350,12],["Iran","🇮🇷",20,0,6,12,0,70,120,19],["Danemark","🇩🇰",21,0,6,30,0,14,300,24],["Corée du Sud","🇰🇷",22,0,11,43,0,19,200,38],["Autriche","🇦🇹",23,0,7,43,0,21,300,29],["Équateur","🇪🇨",24,0,4,10,0,55,250,16],["Australie","🇦🇺",25,0,6,13,0,15,150,25],["Turquie","🇹🇷",26,0,2,20,0,40,350,10],["Suède","🇸🇪",27,0,12,80,1,4,250,51],["Ukraine","🇺🇦",28,0,1,5,0,28,250,4],["Pologne","🇵🇱",30,0,9,39,0,30,250,38],["Canada","🇨🇦",31,0,2,2,0,9,150,8],["Norvège","🇳🇴",33,0,3,7,0,12,350,8],["Égypte","🇪🇬",35,0,3,7,0,70,150,13],["Algérie","🇩🇿",36,0,4,13,0,70,220,13],["Côte d'Ivoire","🇨🇮",37,0,3,7,0,70,250,9],["Hongrie","🇭🇺",38,0,9,87,2,50,150,32],["Nigeria","🇳🇬",40,0,6,17,0,36,250,21],["Cameroun","🇨🇲",45,0,8,11,0,55,150,23],["Pérou","🇵🇪",45,0,5,31,0,55,100,18],["Chili","🇨🇱",50,0,9,40,0,37,120,33],["Ghana","🇬🇭",55,0,4,13,0,65,120,16]];
+const rk=v=>v.map(x=>1+v.filter(w=>w>x).length);
+const FALL=(()=>{const c=[0,1,2,3,4,5,6,7].map(j=>rk(FV.map(r=>j==0||j==5?-r[2+j]:r[2+j])));return FV.map((r,i)=>[r[0],r[1],...c.map(x=>x[i])])})();
+/* ===== utilitaires ===== */
+const $a=document.getElementById("app");let S={};
 const key=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const today=()=>key(new Date());
-function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
-function seedOf(s){let h=2166136261;for(const c of s)h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0}
-function ls(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
-function shuf(a,r){for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function cfg(){return{p:ls("wr_easy")?2:1}}
 function wkey(){const d=new Date(),j=new Date(d.getFullYear(),0,1);return d.getFullYear()+"-W"+Math.ceil(((d-j)/864e5+j.getDay()+1)/7)}
+function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let x=Math.imul(s^s>>>15,1|s);x=x+Math.imul(x^x>>>7,61|x)^x;return((x^x>>>14)>>>0)/4294967296}}
+function seedOf(s){let h=2166136261;for(const c of s)h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0}
+function shuf(a,r){for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const cfg=()=>({p:ls("wr_easy")?2:1});
+const pool=m=>m==="foot"?[FALL,FALLC]:[ALL,ALLC];
 function build(mode,seed){const p=cfg().p,r=mode==="daily"?rng(seedOf(today())):mode==="weekly"?rng(seedOf(wkey())):mode==="duel"?rng(seedOf("D"+seed)):Math.random;
- let cs,cand;for(let a=0;a<40;a++){cs=shuf(ALLC.map((_,i)=>i),r).slice(0,8);cand=ALL.filter(c=>cs.every(i=>c[2+i]!=null));if(cand.length>=12)break}
+ const[A,C]=pool(mode);let cs,cand;for(let a=0;a<40;a++){cs=shuf(C.map((_,i)=>i),r).slice(0,8);cand=A.filter(c=>cs.every(i=>c[2+i]!=null));if(cand.length>=12)break}
  const rows=cand.map(c=>[c[0],c[1],...cs.map(i=>c[2+i])]);
- return{q:shuf(rows.map((_,i)=>i),r).slice(0,8+p),ord:shuf([0,1,2,3,4,5,6,7],r),p,seed,rows,names:cs.map(i=>ALLC[i])}}
+ return{q:shuf(rows.map((_,i)=>i),r).slice(0,8+p),ord:shuf([0,1,2,3,4,5,6,7],r),p,seed,rows,names:cs.map(i=>C[i]),mx:mode==="foot"?40:195}}
 const pop=m=>m.toString(2).replace(/0/g,"").length;
 function plan(q,p){const L=[Array(256).fill(Infinity)];L[0][0]=0;
  for(let k=0;k<q.length;k++){const dp=L[k],nd=dp.slice();
@@ -110,81 +124,115 @@ function plan(q,p){const L=[Array(256).fill(Infinity)];L[0][0]=0;
   for(let j=0;j<8;j++)if(m>>j&1){const pm=m^1<<j;if(L[k-1][pm]+D[q[k-1]][2+j]===L[k][m]){mv[k-1]=j;m=pm;break}}}
  return{s:L[q.length][255],m:mv}}
 const perfect=(q,p)=>plan(q,p).s;
-const col=r=>r<=15?"#2fcf8f":r<=50?"#fbb41f":"#ef5350";
-const sq=r=>r<=15?"🟩":r<=50?"🟨":"🟥";
-const LB={daily:"QUOTIDIEN",weekly:"HEBDO",free:"CLASSIQUE",blitz:"ÉCLAIR",duel:"DUEL"};let sel="free";
+let MX=195;const col=r=>r<=MX*.08?"#2fcf8f":r<=MX*.26?"#fbb41f":"#ef5350",sq=r=>r<=MX*.08?"🟩":r<=MX*.26?"🟨":"🟥";
+function tier(b,m){if(b==null)return["—",0];const x=m==="foot"?b/.3:b,n=x>200?"Bronze":x>150?"Argent":x>110?"Or":"Platine";return[n,Math.max(6,Math.min(100,(260-x)/1.7))]}
 function toast(m){const e=document.createElement("div");e.className="ts";e.textContent=m;document.body.appendChild(e);setTimeout(()=>e.remove(),2400)}
-const nav=a=>`<nav class="nv">${[["🏠","Accueil","home()","h"],["🏅","Rangs","home('r')","r"],["⚔️","Duels","home('d')","d"],["👤","Connexion","toast('Connexion : bientôt !')","c"]].map(([i,l,f,k])=>`<button class="${(a||"h")===k?"on":""}" onclick="${f}">${i}<span>${l}</span></button>`).join("")}</nav>`;
+/* ===== Supabase : compte, profil, classement mondial ===== */
+let sb=null,ME=null;
+function initSB(){if(!SB_URL||!window.supabase)return;sb=supabase.createClient(SB_URL,SB_KEY);
+ sb.auth.getSession().then(({data})=>setMe(data.session));sb.auth.onAuthStateChange((_e,s)=>setMe(s))}
+async function setMe(s){if(!s){ME=null;return}const u=s.user;
+ try{let{data}=await sb.from("profiles").select("*").eq("id",u.id).maybeSingle();
+  if(!data){const n=String((u.user_metadata&&u.user_metadata.name)||u.email||"Player").split("@")[0].slice(0,16);
+   ({data}=await sb.from("profiles").insert({id:u.id,username:n.length<2?"Player":n,avatar:"🌍"}).select().single())}
+  ME=data;if(!S.mode)home(location.hash==="#p"?"p":undefined)}catch(e){}}
+const login=p=>sb?sb.auth.signInWithOAuth({provider:p,options:{redirectTo:location.origin+location.pathname}}):toast(t("nob"));
+async function logout(){await sb.auth.signOut();ME=null;home("p")}
+const boardOf=()=>S.mode==="daily"?today():S.mode==="weekly"?wkey():S.mode==="duel"?"D"+S.seed:"all";
+async function submit(mode,board,score,perf){if(!sb||!ME)return;try{const{data}=await sb.from("scores").select("id,score").eq("user_id",ME.id).eq("mode",mode).eq("board",board).maybeSingle();
+ if(!data)await sb.from("scores").insert({user_id:ME.id,mode,board,score,perfect:perf});else if(score<data.score)await sb.from("scores").update({score,perfect:perf}).eq("id",data.id)}catch(e){}}
+async function lb(mode,board){const{data}=await sb.from("scores").select("score,user_id,profiles(username,avatar)").eq("mode",mode).eq("board",board).order("score",{ascending:true}).limit(50);return data||[]}
+/* ===== écrans ===== */
+const nav=a=>`<nav class="nv">${[["🏠","home","home()","h"],["🏅","ranks","home('r')","r"],["⚔️","duels","home('d')","d"],["👤","profile","home('p')","p"]].map(([i,l,f,k])=>`<button class="${(a||"h")===k?"on":""}" onclick="${f}"><b>${i}</b><span>${t(l)}</span></button>`).join("")}</nav>`;
+const hist=()=>ls("wr_hist")||[];
+const pname=()=>ME?ME.username:(ls("wr_name")||t("guest")),pav=()=>ME?ME.avatar:(ls("wr_av")||"👤");
+function head(){const h=hist(),lv=1+Math.floor(h.length/3),pr=h.length%3/3*100;
+ return`<div class="hd"><div class="brand"><span class="mark">🌍</span><h1>World<span>Rank</span></h1></div><button class="rg" onclick="home('p')" style="--p:${pr}%"><em>${pav()}</em><i>${lv}</i></button></div>`}
 function setEasy(v){ls("wr_easy",v);home()}
-function tier(b){if(b==null)return["—",0];const n=b>200?"Bronze":b>150?"Argent":b>110?"Or":"Platine";return[n,Math.max(6,Math.min(100,(260-b)/1.7))]}
-function home(t){
+let sel="free",REAL=false;
+function home(tab){
  clearInterval(S.t);document.body.className="home";S={};
- const hist=ls("wr_hist")||[],lv=1+Math.floor(hist.length/3),pr=hist.length%3/3*100,easy=ls("wr_easy"),p=cfg().p;
- const bm=m=>{const a=hist.filter(h=>h.m===m).map(h=>h.s);return a.length?Math.min(...a):null};
- const head=`<div class="hd"><h1>🌍 World<span>Rank</span></h1><div class="row" style="gap:12px"><button onclick="home('s')" style="font-size:22px">⚙️</button><div class="rg" style="--p:${pr}%"><small>NIVEAU</small><b>${lv}</b></div></div></div>`;
- if(t==="d")return duels(head);if(t==="s")return sets(head);
- if(t==="r"){const rows=[["📅 Quotidien","daily"],["🏛️ Hebdo","weekly"],["🎯 Classique","free"],["⚡ Éclair","blitz"]];
-  app.innerHTML=head+`<div class="sec"><b>RECORDS</b><div class="log">${rows.map(([l,m])=>`<div><span>${l}</span><b>${bm(m)??"—"}</b></div>`).join("")}</div></div>
-  <div class="sec"><b>DERNIÈRES PARTIES</b><div class="log">${hist.slice(-8).reverse().map(h=>`<div><span>${h.d} · ${LB[h.m]}</span><b>${h.s}</b></div>`).join("")||'<span class="mu">Aucune partie.</span>'}</div><p class="mu" style="font-size:12px">Classement local. Le classement mondial demandera un serveur.</p></div>`+nav("r");return}
- const days=ls("wr_days")||[],td=today(),mon=new Date();mon.setDate(mon.getDate()-((mon.getDay()+6)%7));
+ if(tab==="r")return rangs();if(tab==="d")return duels();if(tab==="p")return profile();
+ const h=hist(),easy=ls("wr_easy"),p=cfg().p,td=today(),mon=new Date();mon.setDate(mon.getDate()-((mon.getDay()+6)%7));
+ const days=ls("wr_days")||[],bm=m=>{const a=h.filter(x=>x.m===m).map(x=>x.s);return a.length?Math.min(...a):null};
  const wk=["L","M","M","J","V","S","D"].map((l,i)=>{const d=new Date(mon);d.setDate(mon.getDate()+i);const k=key(d);return`<span class="d ${days.includes(k)?"on":""} ${k===td?"td":""}">${l}</span>`}).join("");
  let st=0,d=new Date();if(!days.includes(td))d.setDate(d.getDate()-1);while(days.includes(key(d))){st++;d.setDate(d.getDate()-1)}
- const best=ls("wr_best_"+td),perf=(b=>{const d=D;D=b.rows;try{return perfect(b.q,b.p)}finally{D=d}})(build("daily")),wb=bm("weekly"),[tn,tp]=tier(bm(sel));
+ const best=ls("wr_best_"+td),perf=(b=>{const o=D;D=b.rows;try{return perfect(b.q,b.p)}finally{D=o}})(build("daily")),wb=bm("weekly"),[tn,tp]=tier(bm(sel),sel);
  const tl=(m,ic,bg)=>`<button class="tl ${sel===m?"on":""}" style="--b:${bg}" onclick="sel='${m}';home()">${ic}<small>${bm(m)??"—"}</small></button>`;
- app.innerHTML=head+`<div class="sec"><b>DÉFIS</b><div class="row" style="margin-top:8px"><span>🔥 ${st}</span><span class="wk" style="flex:1;margin:0 0 0 12px">${wk}</span></div>
- <div class="dq"><div class="mu">📅 Le même plateau pour tous</div><div class="row" style="align-items:flex-end"><div style="font-size:23px;font-weight:800">${best!=null?"Recommencer<br>le défi du jour":"Défi quotidien"}</div><div><div class="mu" style="text-align:right">Score parfait</div><div class="perf">${perf}</div></div></div>
- <p class="mu">${8+p} pays · 8 choix · ${p} passe${p>1?"s":""}${best!=null?` · meilleur : <b>${best}</b><br>⏳ Prochain défi dans ${nxt()}`:""}</p><button class="btn" style="background:#dbe7ff;color:#14234d" onclick="start('daily')">${best!=null?"Recommencer le défi":"Jouer au défi"} ▷</button></div>
- <button class="wkc" onclick="start('weekly')"><span>🏛️</span><div><b>Hebdo</b><br><small>Plateau de la semaine${wb!=null?" · meilleur : "+wb:""}</small><br><small>Semaine ${wkey().split("W")[1]}</small></div><span>▶</span></button></div>
- <div class="sec"><div class="row"><b>JEUX ORIGINAUX</b><div class="tg"><button class="${easy?"":"on"}" onclick="setEasy(0)">🌐 Normal</button><button class="${easy?"on":""}" onclick="setEasy(1)">🌱 Facile</button></div></div>
- <div class="tls">${tl("free","🎯","#7b2fe0")}${tl("blitz","⚡","#e8782f")}<button class="tl pl" onclick="toast('Nouveaux modes : bientôt !')">＋<small>Plus</small></button></div>
- <div class="mc"><div class="row"><div><b style="font-size:20px">${sel==="free"?"Classique":"Éclair"}</b><div class="mu">${sel==="free"?"Plateau aléatoire":"8 secondes par pays"} · meilleur : ${bm(sel)??"—"}</div></div><button class="go" onclick="start('${sel}')">JOUER ▶</button></div>
- <div class="row mu" style="margin-top:8px"><b style="color:#c68a4b">● ${tn}</b></div><div class="bar"><i style="width:${tp}%"></i></div></div></div>
- <p class="mu" style="font-size:12px">${ALL===ALL0?"Mode démo : "+ALL.length+" pays, rangs approximatifs.":ALL.length+" pays · "+ALLC.length+" catégories · données World Bank."}</p>`+nav()}
-function start(mode,seed){const b=build(mode,seed);D=b.rows;CATS=b.names;S={mode,...b,pos:0,res:Array(8).fill(null),dots:[],moves:[],score:0,joker:b.p,perf:perfect(b.q,b.p)};document.body.className=mode;draw()}
+ const sub={free:t("random"),blitz:t("secs"),foot:t("footd")}[sel],ttl={free:t("classic"),blitz:t("blitz"),foot:t("foot")}[sel];
+ $a.innerHTML=head()+`<div class="glass"><div class="row"><b class="h">${t("chal")}</b><span>🔥 ${st}</span></div><div class="row" style="margin-top:10px"><span></span><div class="wk" style="margin:0;width:100%">${wk}</div></div>
+ <div class="dq"><div class="mu">📅 ${t("same")}</div><div class="row" style="align-items:flex-end"><div style="font-size:21px;font-weight:800;line-height:1.2;margin-top:6px">${best!=null?t("again"):t("daily")}</div><div><div class="mu" style="text-align:right">${t("perfect")}</div><div class="perf">${perf}</div></div></div>
+ <p class="mu">${t("line",{n:8+p,p,w:t(p>1?"passes":"passw")})}${best!=null?` · ${t("best")} : <b>${best}</b><br>⏳ ${t("nextin")} ${nxt()}`:""}</p><button class="btn l" onclick="start('daily')">${best!=null?t("redo"):t("playd")} ▷</button></div>
+ <button class="wkc" onclick="start('weekly')"><span>🏛️</span><div><b>${t("weekly")}</b><br><small>${t("weeksub")}${wb!=null?" · "+t("best")+" : "+wb:""}</small><br><small>${t("week")} ${wkey().split("W")[1]}</small></div><span>▶</span></button></div>
+ <div class="glass"><div class="row"><b class="h">${t("orig")}</b><div class="tg"><button class="${easy?"":"on"}" onclick="setEasy(0)">🌐 ${t("normal")}</button><button class="${easy?"on":""}" onclick="setEasy(1)">🌱 ${t("easy")}</button></div></div>
+ <div class="tls">${tl("free","🎯","linear-gradient(135deg,#7b2fe0,#a45bc2)")}${tl("blitz","⚡","linear-gradient(135deg,#e8782f,#f5a04f)")}${tl("foot","⚽","linear-gradient(135deg,#1f9d57,#2fb868)")}<button class="tl pl" onclick="toast(t('soon'))">＋<small>${t("more")}</small></button></div>
+ <div class="mc"><div class="row"><div><b style="font-size:19px">${ttl}</b><div class="mu">${sub} · ${t("best")} : ${bm(sel)??"—"}</div></div><button class="go" onclick="start('${sel}')">${t("playb")} ▶</button></div>
+ <div class="mu" style="margin-top:8px"><b style="color:#c68a4b">● ${tn}</b></div><div class="bar"><i style="width:${tp}%"></i></div></div></div>
+ <p class="mu" style="font-size:12px;text-align:center">${!REAL?t("demo",{n:ALL.length}):t("real",{n:ALL.length,c:ALLC.length})}</p>`+nav()}
 function nxt(){const n=new Date(),x=new Date(n);x.setHours(24,0,0,0);const m=Math.floor((x-n)/6e4);return Math.floor(m/60)+"h "+m%60+"min"}
-let AC;function snd(r){if(ls("wr_snd")===0)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type="triangle";o.frequency.value=r<=15?880:r<=50?560:220;g.gain.value=.08;o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+.15)}catch(e){}}
-function vib(r){if(ls("wr_vib")!==0)try{navigator.vibrate&&navigator.vibrate(r<=15?15:r<=50?[10,30,10]:45)}catch(e){}}
-function confetti(){for(let i=0;i<30;i++){const e=document.createElement("i");e.className="cf";e.textContent=["🎉","✨","⭐","🌍"][i%4];e.style.cssText=`left:${Math.random()*100}vw;animation-delay:${Math.random()*.6}s`;document.body.appendChild(e);setTimeout(()=>e.remove(),3300)}}
-function how(){const o=document.createElement("div");o.className="ov";o.innerHTML=`<div class="md"><h2>Comment jouer ?</h2><p>1️⃣ Un pays apparaît.</p><p>2️⃣ Choisis une catégorie : son <b>rang mondial</b> devient tes points.</p><p>3️⃣ Chaque catégorie ne sert qu'<b>une fois</b> : garde les plus « dures » pour les pays qui y sont mal classés.</p><p>4️⃣ Tu peux <b>passer</b> un pays. Vise le score le plus <b>bas</b> 🎯</p><button class="btn" id="ok">C'est parti</button></div>`;document.body.appendChild(o);o.querySelector("#ok").onclick=()=>{ls("wr_seen",1);o.remove()}}
-function duels(head){app.innerHTML=head+`<div class="sec"><b>DUELS ENTRE AMIS</b><p class="mu">Crée un plateau et partage le code : ton ami joue exactement les mêmes pays, puis vous comparez vos scores.</p><button class="btn" onclick="start('duel',Math.random().toString(36).slice(2,7).toUpperCase())">⚔️ Créer un duel</button><button class="btn s" onclick="joinDuel()">🔑 Rejoindre avec un code</button><p class="mu" style="font-size:12px">Jouez avec la même difficulté (Normal / Facile) pour comparer.</p></div>`+nav("d")}
-function joinDuel(){const c=(prompt("Code du duel :")||"").trim().toUpperCase();if(c)start("duel",c)}
+let lbT="d";
+async function rangs(){
+ const tabs=[["d","today"],["w","week"],["a","alltime"],["f","foot"]],[mode,board]=lbT==="d"?["daily",today()]:lbT==="w"?["weekly",wkey()]:lbT==="a"?["free","all"]:["foot","all"];
+ $a.innerHTML=head()+`<div class="glass"><div class="tg wide">${tabs.map(([k,l])=>`<button class="${lbT===k?"on":""}" onclick="lbT='${k}';home('r')">${t(l)}</button>`).join("")}</div><div id="lb" class="log"><span class="mu">…</span></div></div>
+ <div class="glass"><b class="h">${t("rec").toUpperCase()}</b><div class="log">${[["📅","daily"],["🏛️","weekly"],["🎯","free"],["⚡","blitz"],["⚽","foot"]].map(([i,m])=>{const a=hist().filter(x=>x.m===m).map(x=>x.s);return`<div><span>${i} ${t("m_"+m)}</span><b>${a.length?Math.min(...a):"—"}</b></div>`}).join("")}</div></div>`+nav("r");
+ const el=document.getElementById("lb");
+ if(!sb){const a=hist().filter(x=>x.m===mode&&(mode!=="daily"||x.d===today())).sort((a,b)=>a.s-b.s).slice(0,10);
+  el.innerHTML=`<span class="mu">${t("nob")}</span>`+a.map((x,i)=>`<div class="${i?"":"me"}"><span>${i+1}. ${pav()} ${esc(pname())}</span><b>${x.s}</b></div>`).join("");return}
+ try{const rows=await lb(mode,board);if(!document.getElementById("lb"))return;
+  el.innerHTML=(ME?"":`<span class="mu">${t("need")}</span>`)+(rows.length?rows.map((r,i)=>`<div class="${ME&&r.user_id===ME.id?"me":""}"><span>${i+1}. ${esc((r.profiles||{}).avatar||"🌍")} ${esc((r.profiles||{}).username||"?")}</span><b>${r.score}</b></div>`).join(""):`<span class="mu">${t("none")}</span>`)}catch(e){el.innerHTML=`<span class="mu">${t("nob")}</span>`}}
+function duels(){$a.innerHTML=head()+`<div class="glass"><b class="h">${t("dt")}</b><p class="mu">${t("dp")}</p><button class="btn" onclick="start('duel',Math.random().toString(36).slice(2,7).toUpperCase())">⚔️ ${t("nd")}</button><button class="btn s" onclick="joinDuel()">🔑 ${t("jd")}</button></div>`+nav("d")}
+function joinDuel(){const c=(prompt(t("dc"))||"").trim().toUpperCase();if(c)start("duel",c)}
+async function pName(){const v=(prompt(t("user"),pname())||"").trim().slice(0,16);if(v.length<2)return;
+ if(ME&&sb){await sb.from("profiles").update({username:v}).eq("id",ME.id);ME.username=v}else ls("wr_name",v);home("p")}
+async function pAv(a){if(ME&&sb){await sb.from("profiles").update({avatar:a}).eq("id",ME.id);ME.avatar=a}else ls("wr_av",a);home("p")}
 function rst(){try{localStorage.clear()}catch(e){}home()}
-function sets(head){const on=k=>ls(k)!==0,row=(l,k)=>`<div><span>${l}</span><button class="go" onclick="ls('${k}',${on(k)?0:1});home('s')">${on(k)?"Activé":"Coupé"}</button></div>`;
- app.innerHTML=head+`<div class="sec"><b>RÉGLAGES</b><div class="log">${row("🔊 Sons","wr_snd")}${row("📳 Vibrations","wr_vib")}</div><button class="btn s" onclick="how()">❓ Comment jouer</button><button class="btn s" onclick="if(confirm('Effacer toute ta progression ?'))rst()">🗑️ Réinitialiser mes données</button></div>`+nav("s")}
+function profile(){const h=hist(),on=k=>ls(k)!==0,row=(l,k)=>`<div><span>${l}</span><button class="go" onclick="ls('${k}',${on(k)?0:1});home('p')">${on(k)?"ON":"OFF"}</button></div>`,all=h.map(x=>x.s);
+ $a.innerHTML=head()+`<div class="glass"><div class="pf"><div class="big">${esc(pav())}</div><div style="flex:1"><b style="font-size:20px">${esc(pname())}</b><div class="mu">${t("lvlw")} ${1+Math.floor(h.length/3)} · ${h.length} ${t("games").toLowerCase()}</div></div><button class="go" onclick="pName()">✏️</button></div>
+ <div class="av">${["🌍","⚽","🦊","🐯","🚀","👑","🔥","🧠"].map(a=>`<button class="${pav()===a?"on":""}" onclick="pAv('${a}')">${a}</button>`).join("")}</div>
+ ${ME?`<button class="btn s" onclick="logout()">${t("out")}</button>`:`<button class="btn" onclick="login('google')">🟢 ${t("lg")}</button><button class="btn s" onclick="login('apple')">🍎 ${t("la")}</button>${sb?"":`<p class="mu">${t("nob")}</p>`}`}</div>
+ <div class="glass"><div class="log">${row("🔊 "+t("snd"),"wr_snd")}${row("📳 "+t("vib"),"wr_vib")}<div><span>🌐 ${t("lang")}</span><div class="tg">${LANGS.map(l=>`<button class="${l===lang?"on":""}" onclick="setLang('${l}');home('p')">${l.toUpperCase()}</button>`).join("")}</div></div></div>
+ <button class="btn s" onclick="how()">❓ ${t("howt")}</button><button class="btn s" onclick="if(confirm('?'))rst()">🗑️ ${t("reset")}</button></div>`+nav("p")}
+function how(){const o=document.createElement("div");o.className="ov";o.innerHTML=`<div class="md"><h2>${t("howt")}</h2><p>1️⃣ ${t("h1")}</p><p>2️⃣ ${t("h2")}</p><p>3️⃣ ${t("h3")}</p><p>4️⃣ ${t("h4")}</p><button class="btn" id="ok">${t("go")}</button></div>`;document.body.appendChild(o);o.querySelector("#ok").onclick=()=>{ls("wr_seen",1);o.remove()}}
+/* ===== jeu ===== */
+let AC;function snd(r){if(ls("wr_snd")===0)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type="triangle";o.frequency.value=r<=MX*.08?880:r<=MX*.26?560:220;g.gain.value=.08;o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+.15)}catch(e){}}
+function vib(r){if(ls("wr_vib")!==0)try{navigator.vibrate&&navigator.vibrate(r<=MX*.08?15:r<=MX*.26?[10,30,10]:45)}catch(e){}}
+function confetti(){for(let i=0;i<30;i++){const e=document.createElement("i");e.className="cf";e.textContent=["🎉","✨","⭐","⚽"][i%4];e.style.cssText=`left:${Math.random()*100}vw;animation-delay:${Math.random()*.6}s`;document.body.appendChild(e);setTimeout(()=>e.remove(),3300)}}
+function start(mode,seed){const b=build(mode,seed);D=b.rows;CATS=b.names;MX=b.mx;S={mode,...b,pos:0,res:Array(8).fill(null),dots:[],moves:[],score:0,joker:b.p,perf:perfect(b.q,b.p)};document.body.className=mode;draw()}
 function tick(){clearInterval(S.t);if(S.mode!=="blitz")return;let l=8;const b=document.getElementById("tbar");
- S.t=setInterval(()=>{l-=.1;if(b)b.style.width=l/8*100+"%";if(l<=0){clearInterval(S.t);const f=S.ord.filter(i=>!S.res[i]);toast("Temps écoulé !");pick(f[Math.floor(Math.random()*f.length)])}},100)}
+ S.t=setInterval(()=>{l-=.1;if(b)b.style.width=l/8*100+"%";if(l<=0){clearInterval(S.t);const f=S.ord.filter(i=>!S.res[i]);toast(t("up"));pick(f[Math.floor(Math.random()*f.length)])}},100)}
 function draw(){
  const c=D[S.q[S.pos]],n=S.dots.length;
- app.innerHTML=`<div class="top"><button class="back" onclick="home()">←</button><div class="lg">🌍<em>${LB[S.mode]}</em></div><div class="tot"><small>TOTAL</small><b class="${S.rv?"pop":""}">${n?S.score:"–"}</b>
+ $a.innerHTML=`<div class="top"><button class="back" onclick="home()">←</button><div class="lg"><span>${S.mode==="foot"?"⚽":"🌍"}</span><em>${t("m_"+S.mode)}</em></div><div class="tot"><small>${t("total")}</small><b class="${S.rv?"pop":""}">${n?S.score:"–"}</b>
  <div class="dots">${Array.from({length:8},(_,i)=>`<i class="${i===n?"cur":""}" style="${S.dots[i]?`background:${col(S.dots[i])}`:""}"></i>`).join("")}<span style="margin-left:6px">${Math.min(n+1,8)}/8</span></div></div>
  <div class="tools"><button onclick="how()">?</button><button onclick="start('${S.mode}',${S.seed?`'${S.seed}'`:"0"})">↺</button></div></div>
  ${S.mode==="blitz"?'<div class="tb"><i id="tbar"></i></div>':""}
- <div class="gc"><div class="cn"><div class="f">${c[1]}</div><div class="n">${c[0].toUpperCase()}</div>${S.rv?`<div class="rv" style="color:${col(S.rv)}">#${S.rv}</div>`:""}
- <button class="pass" ${S.joker<1||S.lock?"disabled":""} onclick="pass()">⏭<br>PASSER<b>${S.joker}</b></button></div>
- ${S.ord.map(i=>{const r=S.res[i];return r?`<div class="cat u ${S.last===i?"new":""}"><span>${CATS[i]}</span><span class="pill">${r.f}<b style="--c:${col(r.r)}">${r.r}</b></span></div>`:`<button class="cat" ${S.lock?"disabled":""} onclick="pick(${i})">${CATS[i]}</button>`}).join("")}</div>`;
+ <div class="gc"><div class="cn"><div class="f">${c[1]}</div><div class="n">${esc(nm(c[0])).toUpperCase()}</div>${S.rv?`<div class="rv" style="color:${col(S.rv)}">#${S.rv}</div>`:""}
+ <button class="pass" ${S.joker<1||S.lock?"disabled":""} onclick="pass()">⏭<br>${t("pass")}<b>${S.joker}</b></button></div>
+ ${S.ord.map(i=>{const r=S.res[i];return r?`<div class="cat u ${S.last===i?"new":""}"><span>${cn(CATS[i])}</span><span class="pill">${r.f}<b style="--c:${col(r.r)}">${r.r}</b></span></div>`:`<button class="cat" ${S.lock?"disabled":""} onclick="pick(${i})">${cn(CATS[i])}</button>`}).join("")}</div>`;
  if(!S.rv)tick()}
 function pick(i){if(S.lock||S.res[i])return;clearInterval(S.t);const G=S,k=S.pos,c=D[S.q[k]],r=c[2+i];
  S.res[i]={f:c[1],n:c[0],r};S.moves[k]=i;S.dots.push(r);S.score+=r;S.lock=1;S.rv=r;S.last=i;snd(r);vib(r);draw();
  setTimeout(()=>{if(S!==G)return;S.lock=0;S.rv=0;S.pos++;S.dots.length===8?end():draw()},800)}
 function pass(){if(S.lock||S.joker<1)return;S.joker--;S.moves[S.pos]=-1;S.pos++;draw()}
 function end(){
- const d=today(),h=ls("wr_hist")||[];h.push({d,m:S.mode,s:S.score});ls("wr_hist",h.slice(-50));
+ const d=today(),h=hist();h.push({d,m:S.mode,s:S.score});ls("wr_hist",h.slice(-80));
  if(S.mode==="daily"){const b=ls("wr_best_"+d);if(b==null||S.score<b)ls("wr_best_"+d,S.score);const ds=ls("wr_days")||[];if(!ds.includes(d)){ds.push(d);ls("wr_days",ds.slice(-60))}}
- const pl=plan(S.q,S.p),ra=S.perf/S.score,g=ra>=.95?["S","Parfait !"]:ra>=.85?["A","Excellent"]:ra>=.7?["B","Très bien"]:ra>=.55?["C","Pas mal"]:["D","À retenter"];
- const tag=S.mode==="daily"?d:S.mode==="duel"?"⚔️ code "+S.seed:"("+LB[S.mode].toLowerCase()+")";
- S.share=`WorldRank ${tag} 🌍${S.p>1?" (facile)":""}\nScore : ${S.score} · parfait : ${S.perf} · note ${g[0]}\n${S.dots.map(sq).join("")}\n${S.mode==="duel"?"Bats-moi avec le code "+S.seed+" !":"Fais mieux !"}`;
+ submit(S.mode,boardOf(),S.score,S.perf);
+ const pl=plan(S.q,S.p),ra=S.perf/S.score,g=ra>=.95?0:ra>=.85?1:ra>=.7?2:ra>=.55?3:4,ge="SABCD"[g];
+ const tag=S.mode==="daily"?d:S.mode==="duel"?"⚔️ "+S.seed:"("+t("m_"+S.mode).toLowerCase()+")";
+ S.share=`WorldRank ${tag} ${S.mode==="foot"?"⚽":"🌍"}${S.p>1?" ("+t("easy").toLowerCase()+")":""}\n${t("sc")} : ${S.score} · ${t("par")} : ${S.perf} · ${t("gd")} ${ge}\n${S.dots.map(sq).join("")}\n${S.mode==="duel"?t("beatd",{c:S.seed}):t("beat")}`;
  const ic=i=>CATS[i].split(" ")[0],cell=(ci,m)=>m===undefined?"—":m<0?"⏭":ic(m)+" "+D[ci][2+m];
- app.innerHTML=`<div class="top"><button class="back" onclick="home()">←</button><div class="tot"><small>SCORE FINAL</small><b>${S.score}</b><div>Parfait : ${S.perf} · écart +${S.score-S.perf}</div></div><div class="gr">${g[0]}</div></div>
- <div class="gc"><div style="text-align:center;font-weight:800;color:#222">${g[1]}${S.mode==="daily"?` · prochain défi dans ${nxt()}`:""}</div>
- <div class="log" style="color:#222">${S.ord.map(i=>{const r=S.res[i];return`<div><span>${r.f} ${r.n} · ${CATS[i]}</span><b style="color:${col(r.r)}">${r.r}</b></div>`}).join("")}</div>
- <button class="btn s" style="color:#222" onclick="document.getElementById('bp').style.display='block';this.remove()">🔍 Voir le meilleur plateau</button>
- <div id="bp" class="cmp" style="display:none;color:#222"><b>Toi vs idéal</b>${S.q.map((ci,k)=>`<div class="row" style="padding:5px 0;border-bottom:1px solid #eee"><span>${D[ci][1]} ${D[ci][0]}</span><span>${cell(ci,S.moves[k])} <small>→ idéal</small> <b>${cell(ci,pl.m[k]<0?-1:pl.m[k])}</b></span></div>`).join("")}</div>
- <button class="btn" id="sh" onclick="share()">📤 Partager mon score</button>
- <button class="btn s" style="color:#222" onclick="start('${S.mode==="daily"||S.mode==="weekly"||S.mode==="duel"?"free":S.mode}')">🎯 Rejouer</button></div>`;
+ $a.innerHTML=`<div class="top"><button class="back" onclick="home()">←</button><div class="tot"><small>${t("final")}</small><b>${S.score}</b><div style="font-size:13px">${t("perfect")} : ${S.perf} · ${t("gap")} +${S.score-S.perf}</div></div><div class="gr">${ge}</div></div>
+ <div class="gc"><div style="text-align:center;font-weight:800;color:#222">${t("g"+g)}${S.mode==="daily"?` · ${t("nextin")} ${nxt()}`:""}</div>
+ <div class="log" style="color:#222">${S.ord.map(i=>{const r=S.res[i];return`<div style="border-color:#0001"><span>${r.f} ${esc(nm(r.n))} · ${cn(CATS[i])}</span><b style="color:${col(r.r)}">${r.r}</b></div>`}).join("")}</div>
+ <button class="btn s" style="color:#222;border-color:#0002" onclick="document.getElementById('bp').style.display='block';this.remove()">🔍 ${t("bb")}</button>
+ <div id="bp" style="display:none;color:#222;font-size:13px"><b>${t("you")} → ${t("ideal")}</b>${S.q.map((ci,k)=>`<div class="row" style="padding:5px 0;border-bottom:1px solid #eee"><span>${D[ci][1]} ${esc(nm(D[ci][0]))}</span><span>${cell(ci,S.moves[k])} → <b>${cell(ci,pl.m[k]<0?-1:pl.m[k])}</b></span></div>`).join("")}</div>
+ <button class="btn" id="sh" onclick="share()">📤 ${t("share")}</button>
+ <button class="btn s" style="color:#222;border-color:#0002" onclick="start('${S.mode==="daily"||S.mode==="weekly"||S.mode==="duel"?"free":S.mode}')">🎯 ${t("replay")}</button></div>`;
  if(ra>=.85)confetti()}
 async function share(){try{if(navigator.share){await navigator.share({text:S.share});return}}catch(e){}
- try{await navigator.clipboard.writeText(S.share);document.getElementById("sh").textContent="✅ Copié !"}catch(e){prompt("Copie ton score :",S.share)}}
-home();if(!ls("wr_seen"))how();
+ try{await navigator.clipboard.writeText(S.share);document.getElementById("sh").textContent="✅ "+t("copied")}catch(e){prompt("",S.share)}}
+initSB();home();if(!ls("wr_seen"))how();
 fetch("data.json").then(r=>r.ok?r.json():null).then(j=>{if(!j||!j.cats||!j.countries||j.cats.length<8)return;
- ALLC=j.cats.map(c=>c.name);ALL=j.countries.map(c=>[c.n,c.f,...c.r]);if(!S.mode){home();toast(`Données chargées : ${ALL.length} pays · ${ALLC.length} catégories`)}}).catch(()=>{});
+ REAL=j.source!=="demo";ALLC=j.cats.map(c=>c.name);ALL=j.countries.map(c=>{ALT[c.n]={en:c.e,es:c.s};return[c.n,c.f,...c.r]});if(!S.mode){home();toast(t("real",{n:ALL.length,c:ALLC.length}))}}).catch(()=>{});
 </script></body></html>
