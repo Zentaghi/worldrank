@@ -1,0 +1,200 @@
+rank,country,visa_free_score
+1,Singapore,193
+2,Japan,188
+2,South Korea,188
+2,United Arab Emirates,188
+3,Sweden,187
+4,Belgium,186
+4,Denmark,186
+4,Finland,186
+4,France,186
+4,Germany,186
+4,Ireland,186
+4,Italy,186
+4,Luxembourg,186
+4,Netherlands,186
+4,Norway,186
+4,Spain,186
+5,Austria,185
+5,Greece,185
+5,Malta,185
+5,Portugal,185
+5,Switzerland,185
+6,Hungary,184
+6,Malaysia,184
+6,Poland,184
+6,United Kingdom,184
+7,Australia,183
+7,Canada,183
+7,Czechia,183
+7,Latvia,183
+7,New Zealand,183
+7,Slovakia,183
+7,Slovenia,183
+8,Croatia,182
+8,Estonia,182
+9,Liechtenstein,181
+9,Lithuania,181
+10,Iceland,180
+10,United States,180
+11,Bulgaria,178
+11,Romania,178
+12,Monaco,176
+13,Cyprus,175
+13,Hong Kong (SAR China),175
+14,Chile,174
+15,Brazil,170
+16,Andorra,169
+16,Argentina,169
+17,Israel,167
+18,San Marino,166
+19,Barbados,164
+20,Brunei,163
+21,St. Vincent and the Grenadines,158
+21,The Bahamas,158
+22,St. Kitts and Nevis,157
+23,Mexico,155
+23,Seychelles,155
+23,Uruguay,155
+24,Antigua and Barbuda,154
+25,Vatican City,152
+26,Mauritius,149
+27,Grenada,148
+28,Costa Rica,147
+29,Panama,146
+30,Dominica,144
+30,Paraguay,144
+31,Macao (SAR China),143
+31,St. Lucia,143
+31,Trinidad and Tobago,143
+32,Ukraine,142
+33,Peru,141
+34,Taiwan (Chinese Taipei),136
+35,Serbia,135
+36,Solomon Islands,134
+37,Guatemala,131
+38,Colombia,130
+38,El Salvador,130
+39,Honduras,129
+40,Marshall Islands,128
+40,Samoa,128
+41,Montenegro,127
+41,North Macedonia,127
+42,Tonga,126
+43,Nicaragua,125
+44,Tuvalu,124
+45,Albania,123
+45,Bosnia and Herzegovina,123
+46,Micronesia,122
+47,Georgia,121
+47,Kiribati,121
+48,Moldova,120
+48,Palau Islands,120
+49,Venezuela,115
+50,Russian Federation,114
+51,Qatar,112
+51,Türkiye,112
+52,South Africa,101
+53,Belize,100
+54,Kuwait,97
+55,Maldives,93
+55,Timor-Leste,93
+56,Ecuador,91
+57,Saudi Arabia,90
+58,Guyana,88
+59,Bahrain,87
+59,Fiji,87
+60,Vanuatu,85
+61,Oman,84
+62,China,83
+62,Jamaica,83
+62,Naoero,83
+62,Papua New Guinea,83
+63,Kosovo,82
+64,Botswana,81
+65,Belarus,78
+66,Kazakhstan,77
+66,Thailand,77
+67,Bolivia,76
+67,Suriname,76
+68,Lesotho,73
+68,Namibia,73
+69,Dominican Republic,72
+70,eSwatini,71
+71,Indonesia,70
+71,Kenya,70
+71,Malawi,70
+71,Morocco,70
+72,The Gambia,69
+73,Azerbaijan,68
+73,Rwanda,68
+73,Tanzania,68
+74,Ghana,67
+75,Philippines,66
+76,Benin,65
+76,Tunisia,65
+76,Uganda,65
+77,Cape Verde Islands,64
+77,Mongolia,64
+77,Zambia,64
+78,Armenia,63
+78,Sierra Leone,63
+79,Zimbabwe,61
+80,Mozambique,60
+81,Kyrgyzstan,59
+81,São Tomé and Príncipe,59
+82,Burkina Faso,57
+82,Togo,57
+82,Uzbekistan,57
+83,Cuba,56
+83,Côte d'Ivoire,56
+83,Gabon,56
+83,Madagascar,56
+83,Senegal,56
+84,Algeria,55
+84,India,55
+84,Mauritania,55
+85,Equatorial Guinea,54
+85,Niger,54
+86,Guinea,53
+86,Mali,53
+87,Tajikistan,52
+88,Chad,51
+88,Comoro Islands,51
+88,Guinea-Bissau,51
+89,Angola,49
+89,Egypt,49
+89,Haiti,49
+89,Jordan,49
+89,Liberia,49
+89,Vietnam,49
+90,Burundi,48
+90,Cameroon,48
+90,Central African Republic,48
+91,Bhutan,47
+91,Cambodia,47
+91,Congo (Rep.),47
+92,Congo (Dem. Rep.),45
+92,Djibouti,45
+92,Laos,45
+92,Nigeria,45
+93,Turkmenistan,44
+94,Myanmar,43
+95,Ethiopia,41
+95,Lebanon,41
+95,South Sudan,41
+95,Sudan,41
+96,Libya,39
+97,Eritrea,38
+97,Sri Lanka,38
+98,Iran,37
+98,Palestinian Territory,37
+99,Bangladesh,35
+99,North Korea,35
+100,Nepal,34
+101,Somalia,32
+102,Yemen,30
+103,Pakistan,29
+104,Iraq,28
+105,Syria,25
+106,Afghanistan,22
