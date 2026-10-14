@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WorldRank</title>
+<style>
+:root{--bg:#eef1fb;--card:#fff;--tx:#161a2b;--mu:#6b7090;--ac:#3b5bdb;--bd:#dfe3f0;--gold:#d9a100;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101a3a;--card:#17254d;--tx:#eef0fa;--mu:#9aa6d0;--ac:#7c93ff;--bd:#2a3a6e;--gold:#fbc531;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101a3a;--card:#17254d;--tx:#eef0fa;--mu:#9aa6d0;--ac:#7c93ff;--bd:#2a3a6e;--gold:#fbc531;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%}
+body{background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;transition:background .3s}
+body.daily{background:linear-gradient(#5b8fe0,#1f4aa8);color:#fff}
+body.free{background:linear-gradient(#9b5fc7,#8d4fbd);color:#fff}
+main{max-width:480px;margin:0 auto;padding:14px}
+h1{font-size:26px;margin:2px 0}h1 span{color:var(--ac)}
+.mu{color:var(--mu);font-size:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;margin:12px 0}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.btn{display:block;width:100%;padding:14px;border-radius:14px;font-weight:700;margin:8px 0;background:var(--ac);color:#fff}
+.btn.s{background:transparent;border:1px solid var(--bd);color:var(--tx)}
+.wk{display:flex;justify-content:space-between;margin:8px 0}
+.d{width:34px;height:34px;border-radius:50%;border:2px solid var(--bd);display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--mu)}
+.d.on{background:var(--ac);color:#fff;border-color:var(--ac)}.d.td{border-color:var(--ac);color:var(--tx)}
+.perf{font-size:44px;font-weight:800;color:var(--gold);text-align:right;line-height:1}
+.log div{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bd);font-size:15px}
+/* game */
+.top{display:flex;align-items:center;gap:10px}
+.back{width:40px;height:40px;border-radius:50%;background:#fff;color:#222;font-size:20px;flex:none}
+.tot{flex:1;text-align:center}.tot small{letter-spacing:3px;font-size:12px;opacity:.8}
+.tot b{display:block;font-size:46px;color:#fbc531;line-height:1.1}
+.dots{display:flex;justify-content:center;gap:6px;align-items:center;font-size:13px}
+.dots i{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.25)}
+.dots i.cur{background:#fff}
+.gc{background:#fff;color:#1b2033;border-radius:26px;padding:14px;margin-top:14px}
+.cn{background:#eff2f9;border-radius:22px;padding:12px;text-align:center;position:relative}
+.cn .f{font-size:64px;line-height:1.1}.cn .n{font-weight:800;letter-spacing:1px;margin-top:2px}
+.pass{position:absolute;right:8px;top:8px;width:64px;background:#fff;border-radius:14px;font-size:11px;font-weight:800;padding:8px 2px;box-shadow:0 4px 12px #0002;color:#222}
+.pass b{position:absolute;top:-8px;right:-8px;background:#fbc531;border-radius:50%;width:24px;height:24px;display:grid;place-items:center;font-size:13px}
+.pass:disabled{opacity:.35}
+.cat{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;background:#f4f6f8;border-radius:16px;padding:13px 14px;margin-top:9px;font-weight:800;font-size:15px;letter-spacing:.3px;color:#222}
+.cat.u{background:#c58bdc;color:#fff;border:2px solid #a45bc2}
+.daily .cat.u{background:#9ec1f2;border-color:#5b8fe0}
+.pill{display:flex;align-items:center;gap:8px;font-size:22px}
+.pill b{background:rgba(255,255,255,.4);border-radius:10px;padding:2px 12px;font-size:16px;border-right:5px solid var(--c)}
+.tools{display:flex;gap:8px}.tools button{width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.2);font-size:18px}
+
+body.home{--card:#15264e;--tx:#eef0fa;--mu:#9aa6d0;--ac:#7c93ff;--bd:#2a3a6e;--gold:#fbc531;background:linear-gradient(#22346e,#17234d) fixed;color:var(--tx);min-height:100vh;padding-bottom:84px}
+body.weekly{background:linear-gradient(#d98a84,#b05a6b);color:#fff}
+body.blitz{background:linear-gradient(#f0954a,#d4602a);color:#fff}
+.weekly .cat.u{background:#e7b0ab;border-color:#c46f76}.blitz .cat.u{background:#f6c08f;border-color:#e0813f}
+.hd{display:flex;justify-content:space-between;align-items:center}
+.rg{width:56px;height:56px;border-radius:50%;background:conic-gradient(var(--ac) var(--p),var(--bd) 0);display:grid;place-items:center;position:relative}
+.rg::before{content:"";position:absolute;inset:5px;background:#17234d;border-radius:50%}
+.rg small,.rg b{position:relative;line-height:1;text-align:center}.rg small{font-size:7px;letter-spacing:1px;margin-top:8px}.rg b{font-size:20px;margin-top:-14px}
+.sec{border:1px solid var(--bd);border-radius:20px;padding:14px;margin:12px 0}
+.sec>b{letter-spacing:2px;font-size:13px;color:var(--mu)}
+.dq{background:#172a52;border:1px solid var(--ac);border-radius:18px;padding:14px;margin-top:10px}
+.wkc{display:flex;align-items:center;gap:12px;background:#bf7470;border-radius:18px;padding:14px;margin-top:10px;width:100%;text-align:left;color:#fff}
+.wkc>span:first-child{font-size:28px;background:#fff3;border-radius:12px;padding:6px}.wkc div{flex:1}.wkc small{opacity:.85}
+.tg{display:flex;background:#0e1a3d;border-radius:14px;padding:4px;gap:4px}.tg button{padding:8px 12px;border-radius:10px;color:var(--mu);font-weight:600;font-size:14px}.tg button.on{background:#2f5bea;color:#fff}
+.tls{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.tl{background:#2a3558;border-radius:16px;padding:14px 4px;font-size:26px;display:flex;flex-direction:column;align-items:center;gap:4px}.tl small{font-size:13px;font-weight:700}
+.tl.on{outline:3px solid #c9b2ff;background:var(--b)}.tl.pl{background:none;border:2px dashed var(--bd);color:var(--mu)}
+.mc{background:#0d1633;border-radius:16px;padding:14px}.bar{height:12px;border-radius:8px;background:#1d2a50;margin:10px 0}.bar i{display:block;height:100%;border-radius:8px;background:#c68a4b}
+.go{background:#2f5bea;color:#fff;font-weight:800;border-radius:12px;padding:12px 18px}
+.nv{position:fixed;left:0;right:0;bottom:0;display:flex;background:#0b1230;padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px));z-index:5}
+.nv button{flex:1;display:flex;flex-direction:column;align-items:center;font-size:20px;color:var(--mu)}.nv span{font-size:12px;font-weight:700}.nv .on{color:#fbc531}
+.lg{width:62px;height:62px;border-radius:16px;background:#fff3;display:grid;place-items:center;font-size:36px;position:relative;flex:none}
+.lg em{position:absolute;bottom:-6px;font-style:normal;font-size:8px;font-weight:800;background:#7b2fe0;border-radius:8px;padding:2px 6px;letter-spacing:.5px}
+.tools{flex-direction:column}.tools button{width:34px;height:34px}
+.tb{height:8px;background:#fff3;border-radius:6px;margin-top:10px}.tb i{display:block;height:100%;width:100%;background:#fbc531;border-radius:6px}
+.ts{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:#000c;color:#fff;padding:10px 16px;border-radius:20px;font-size:14px;z-index:9;max-width:85%;text-align:center}
+
+body.duel{background:linear-gradient(#3fb8b0,#1f7a8c);color:#fff}.duel .cat.u{background:#8fd6cf;border-color:#2aa198}
+@keyframes pop{50%{transform:scale(1.25)}}@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+.pop{animation:pop .4s}.cat.u.new{animation:pop .4s}
+.rv{position:absolute;inset:0;display:grid;place-items:center;font-size:58px;font-weight:900;background:#eff2f9ee;border-radius:22px;animation:pop .35s}
+.cf{position:fixed;top:-30px;font-style:normal;font-size:24px;z-index:20;animation:fall 2.4s linear forwards;pointer-events:none}
+.ov{position:fixed;inset:0;background:#000a;display:grid;place-items:center;z-index:30;padding:20px}
+.md{background:#17254d;color:#eef0fa;border-radius:22px;padding:20px;max-width:380px}.md h2{margin:0 0 8px}.md p{margin:8px 0}
+.gr{display:inline-grid;place-items:center;width:64px;height:64px;border-radius:18px;background:#fbc531;color:#222;font-size:38px;font-weight:900}
+.cmp div{font-size:13px}.cmp small{color:#667}
+</style></head><body><main id="app"></main>
+<script>
+let CATS=["👥 Population","🗺️ Superficie","💰 PIB","❤️ Espérance de vie","💵 PIB/habitant","📊 Dév. humain","🏙️ Densité","✈️ Tourisme"];
+let D=[["France","🇫🇷",23,43,7,17,24],["États-Unis","🇺🇸",3,3,1,48,8],["Chine","🇨🇳",2,4,2,55,70],["Inde","🇮🇳",1,7,5,130,140],["Indonésie","🇮🇩",4,14,16,115,105],["Pakistan","🇵🇰",5,33,40,140,150],["Nigeria","🇳🇬",6,32,35,185,155],["Brésil","🇧🇷",7,5,9,95,80],["Bangladesh","🇧🇩",8,94,33,105,135],["Russie","🇷🇺",9,1,11,110,65],["Mexique","🇲🇽",10,13,14,100,70],["Japon","🇯🇵",12,62,4,1,35],["Éthiopie","🇪🇹",13,27,55,150,180],["Philippines","🇵🇭",14,73,35,125,125],["Égypte","🇪🇬",15,30,37,105,115],["RD Congo","🇨🇩",16,11,90,175,195],["Vietnam","🇻🇳",17,66,34,85,105],["Iran","🇮🇷",18,17,40,90,85],["Turquie","🇹🇷",19,37,18,75,70],["Allemagne","🇩🇪",20,63,3,32,17],["Thaïlande","🇹🇭",21,51,27,70,85],["Royaume-Uni","🇬🇧",22,79,6,33,24],["Afrique du Sud","🇿🇦",24,24,38,165,100],["Italie","🇮🇹",25,71,8,10,30],["Kenya","🇰🇪",28,48,62,140,150],["Corée du Sud","🇰🇷",29,109,12,8,30],["Colombie","🇨🇴",30,26,38,85,95],["Espagne","🇪🇸",31,52,15,5,31],["Argentine","🇦🇷",32,8,22,85,65],["Algérie","🇩🇿",34,10,55,90,100],["Soudan","🇸🇩",35,15,100,160,185],["Ukraine","🇺🇦",36,45,55,135,120],["Canada","🇨🇦",38,2,10,20,20],["Maroc","🇲🇦",39,57,58,105,120],["Pologne","🇵🇱",40,69,21,55,50],["Arabie saoudite","🇸🇦",41,12,19,60,40],["Pérou","🇵🇪",44,19,49,90,90],["Venezuela","🇻🇪",47,33,70,130,120],["Australie","🇦🇺",55,6,13,9,14],["Niger","🇳🇪",62,22,140,165,195],["Mali","🇲🇱",60,24,130,175,180],["Chili","🇨🇱",63,38,45,40,55],["Kazakhstan","🇰🇿",64,9,55,115,60],["Tchad","🇹🇩",70,21,150,190,190],["Pays-Bas","🇳🇱",71,135,17,22,11],["Cuba","🇨🇺",80,105,70,70,100],["Bolivie","🇧🇴",80,28,90,130,130],["Belgique","🇧🇪",82,140,24,28,15],["Suède","🇸🇪",90,55,25,13,16],["Grèce","🇬🇷",90,96,55,30,50],["Portugal","🇵🇹",88,111,50,24,40],["Émirats arabes unis","🇦🇪",92,114,30,50,10],["Autriche","🇦🇹",98,112,28,22,13],["Israël","🇮🇱",98,150,29,11,19],["Suisse","🇨🇭",100,134,20,6,4],["Danemark","🇩🇰",112,130,37,28,8],["Libye","🇱🇾",108,17,90,120,90],["Singapour","🇸🇬",115,190,36,2,5],["Finlande","🇫🇮",117,65,45,33,18],["Norvège","🇳🇴",118,67,30,11,6],["Irlande","🇮🇪",123,120,30,25,2],["Nouvelle-Zélande","🇳🇿",123,75,50,25,25],["Mongolie","🇲🇳",135,18,120,125,100],["Qatar","🇶🇦",140,160,55,50,3],["Luxembourg","🇱🇺",165,175,70,28,1],["Islande","🇮🇸",170,108,100,7,7],["Malte","🇲🇹",170,190,130,15,38],["Maldives","🇲🇻",175,187,150,90,70]];
+const E=[[28,85,1],[20,175,3],[75,80,12],[134,33,40],[112,90,45],[164,60,100],[161,65,130],[89,185,55],[129,8,120],[56,215,17],[77,130,6],[24,40,11],[176,110,120],[113,35,60],[105,125,25],[179,160,170],[107,45,40],[78,140,70],[45,100,4],[7,50,8],[66,90,7],[15,45,10],[110,155,30],[30,55,5],[146,80,80],[19,25,20],[83,155,60],[27,115,2],[48,200,55],[91,190,90],[170,185,150],[100,120,35],[18,225,18],[120,120,25],[36,85,20],[40,195,15],[87,180,65],[119,160,150],[10,235,40],[189,190,170],[185,200,150],[44,170,70],[67,220,70],[187,195,190],[11,28,14],[85,100,60],[118,215,120],[14,30,22],[5,180,40],[33,120,13],[42,100,15],[17,105,16],[22,110,12],[25,25,50],[1,55,25],[4,70,35],[92,225,140],[9,2,30],[12,200,60],[2,205,55],[6,140,45],[16,185,60],[96,230,130],[43,90,55],[23,65,120],[3,235,55],[28,4,50],[87,10,70]];
+D.forEach((c,i)=>c.push(...E[i]));
+const ALL0=D,ALLC0=CATS;let ALL=ALL0,ALLC=ALLC0;
+const app=document.getElementById("app");let S={};
+const key=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const today=()=>key(new Date());
+function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function seedOf(s){let h=2166136261;for(const c of s)h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0}
+function ls(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
+function shuf(a,r){for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function cfg(){return{p:ls("wr_easy")?2:1}}
+function wkey(){const d=new Date(),j=new Date(d.getFullYear(),0,1);return d.getFullYear()+"-W"+Math.ceil(((d-j)/864e5+j.getDay()+1)/7)}
+function build(mode,seed){const p=cfg().p,r=mode==="daily"?rng(seedOf(today())):mode==="weekly"?rng(seedOf(wkey())):mode==="duel"?rng(seedOf("D"+seed)):Math.random;
+ let cs,cand;for(let a=0;a<40;a++){cs=shuf(ALLC.map((_,i)=>i),r).slice(0,8);cand=ALL.filter(c=>cs.every(i=>c[2+i]!=null));if(cand.length>=12)break}
+ const rows=cand.map(c=>[c[0],c[1],...cs.map(i=>c[2+i])]);
+ return{q:shuf(rows.map((_,i)=>i),r).slice(0,8+p),ord:shuf([0,1,2,3,4,5,6,7],r),p,seed,rows,names:cs.map(i=>ALLC[i])}}
+const pop=m=>m.toString(2).replace(/0/g,"").length;
+function plan(q,p){const L=[Array(256).fill(Infinity)];L[0][0]=0;
+ for(let k=0;k<q.length;k++){const dp=L[k],nd=dp.slice();
+  for(let m=0;m<256;m++){if(dp[m]===Infinity)continue;for(let j=0;j<8;j++)if(!(m>>j&1)){const n=m|1<<j;nd[n]=Math.min(nd[n],dp[m]+D[q[k]][2+j])}}
+  for(let m=0;m<256;m++)if(k+1-pop(m)>p)nd[m]=Infinity;L.push(nd)}
+ const mv=Array(q.length).fill(-1);let m=255;
+ for(let k=q.length;k>0;k--){if(L[k-1][m]===L[k][m]&&L[k-1][m]!==Infinity)continue;
+  for(let j=0;j<8;j++)if(m>>j&1){const pm=m^1<<j;if(L[k-1][pm]+D[q[k-1]][2+j]===L[k][m]){mv[k-1]=j;m=pm;break}}}
+ return{s:L[q.length][255],m:mv}}
+const perfect=(q,p)=>plan(q,p).s;
+const col=r=>r<=15?"#2fcf8f":r<=50?"#fbb41f":"#ef5350";
+const sq=r=>r<=15?"🟩":r<=50?"🟨":"🟥";
+const LB={daily:"QUOTIDIEN",weekly:"HEBDO",free:"CLASSIQUE",blitz:"ÉCLAIR",duel:"DUEL"};let sel="free";
+function toast(m){const e=document.createElement("div");e.className="ts";e.textContent=m;document.body.appendChild(e);setTimeout(()=>e.remove(),2400)}
+const nav=a=>`<nav class="nv">${[["🏠","Accueil","home()","h"],["🏅","Rangs","home('r')","r"],["⚔️","Duels","home('d')","d"],["👤","Connexion","toast('Connexion : bientôt !')","c"]].map(([i,l,f,k])=>`<button class="${(a||"h")===k?"on":""}" onclick="${f}">${i}<span>${l}</span></button>`).join("")}</nav>`;
+function setEasy(v){ls("wr_easy",v);home()}
+function tier(b){if(b==null)return["—",0];const n=b>200?"Bronze":b>150?"Argent":b>110?"Or":"Platine";return[n,Math.max(6,Math.min(100,(260-b)/1.7))]}
+function home(t){
+ clearInterval(S.t);document.body.className="home";S={};
+ const hist=ls("wr_hist")||[],lv=1+Math.floor(hist.length/3),pr=hist.length%3/3*100,easy=ls("wr_easy"),p=cfg().p;
+ const bm=m=>{const a=hist.filter(h=>h.m===m).map(h=>h.s);return a.length?Math.min(...a):null};
+ const head=`<div class="hd"><h1>🌍 World<span>Rank</span></h1><div class="row" style="gap:12px"><button onclick="home('s')" style="font-size:22px">⚙️</button><div class="rg" style="--p:${pr}%"><small>NIVEAU</small><b>${lv}</b></div></div></div>`;
+ if(t==="d")return duels(head);if(t==="s")return sets(head);
+ if(t==="r"){const rows=[["📅 Quotidien","daily"],["🏛️ Hebdo","weekly"],["🎯 Classique","free"],["⚡ Éclair","blitz"]];
+  app.innerHTML=head+`<div class="sec"><b>RECORDS</b><div class="log">${rows.map(([l,m])=>`<div><span>${l}</span><b>${bm(m)??"—"}</b></div>`).join("")}</div></div>
+  <div class="sec"><b>DERNIÈRES PARTIES</b><div class="log">${hist.slice(-8).reverse().map(h=>`<div><span>${h.d} · ${LB[h.m]}</span><b>${h.s}</b></div>`).join("")||'<span class="mu">Aucune partie.</span>'}</div><p class="mu" style="font-size:12px">Classement local. Le classement mondial demandera un serveur.</p></div>`+nav("r");return}
+ const days=ls("wr_days")||[],td=today(),mon=new Date();mon.setDate(mon.getDate()-((mon.getDay()+6)%7));
+ const wk=["L","M","M","J","V","S","D"].map((l,i)=>{const d=new Date(mon);d.setDate(mon.getDate()+i);const k=key(d);return`<span class="d ${days.includes(k)?"on":""} ${k===td?"td":""}">${l}</span>`}).join("");
+ let st=0,d=new Date();if(!days.includes(td))d.setDate(d.getDate()-1);while(days.includes(key(d))){st++;d.setDate(d.getDate()-1)}
+ const best=ls("wr_best_"+td),perf=(b=>{const d=D;D=b.rows;try{return perfect(b.q,b.p)}finally{D=d}})(build("daily")),wb=bm("weekly"),[tn,tp]=tier(bm(sel));
+ const tl=(m,ic,bg)=>`<button class="tl ${sel===m?"on":""}" style="--b:${bg}" onclick="sel='${m}';home()">${ic}<small>${bm(m)??"—"}</small></button>`;
+ app.innerHTML=head+`<div class="sec"><b>DÉFIS</b><div class="row" style="margin-top:8px"><span>🔥 ${st}</span><span class="wk" style="flex:1;margin:0 0 0 12px">${wk}</span></div>
+ <div class="dq"><div class="mu">📅 Le même plateau pour tous</div><div class="row" style="align-items:flex-end"><div style="font-size:23px;font-weight:800">${best!=null?"Recommencer<br>le défi du jour":"Défi quotidien"}</div><div><div class="mu" style="text-align:right">Score parfait</div><div class="perf">${perf}</div></div></div>
+ <p class="mu">${8+p} pays · 8 choix · ${p} passe${p>1?"s":""}${best!=null?` · meilleur : <b>${best}</b><br>⏳ Prochain défi dans ${nxt()}`:""}</p><button class="btn" style="background:#dbe7ff;color:#14234d" onclick="start('daily')">${best!=null?"Recommencer le défi":"Jouer au défi"} ▷</button></div>
+ <button class="wkc" onclick="start('weekly')"><span>🏛️</span><div><b>Hebdo</b><br><small>Plateau de la semaine${wb!=null?" · meilleur : "+wb:""}</small><br><small>Semaine ${wkey().split("W")[1]}</small></div><span>▶</span></button></div>
+ <div class="sec"><div class="row"><b>JEUX ORIGINAUX</b><div class="tg"><button class="${easy?"":"on"}" onclick="setEasy(0)">🌐 Normal</button><button class="${easy?"on":""}" onclick="setEasy(1)">🌱 Facile</button></div></div>
+ <div class="tls">${tl("free","🎯","#7b2fe0")}${tl("blitz","⚡","#e8782f")}<button class="tl pl" onclick="toast('Nouveaux modes : bientôt !')">＋<small>Plus</small></button></div>
+ <div class="mc"><div class="row"><div><b style="font-size:20px">${sel==="free"?"Classique":"Éclair"}</b><div class="mu">${sel==="free"?"Plateau aléatoire":"8 secondes par pays"} · meilleur : ${bm(sel)??"—"}</div></div><button class="go" onclick="start('${sel}')">JOUER ▶</button></div>
+ <div class="row mu" style="margin-top:8px"><b style="color:#c68a4b">● ${tn}</b></div><div class="bar"><i style="width:${tp}%"></i></div></div></div>
+ <p class="mu" style="font-size:12px">${ALL===ALL0?"Mode démo : "+ALL.length+" pays, rangs approximatifs.":ALL.length+" pays · "+ALLC.length+" catégories · données World Bank."}</p>`+nav()}
+function start(mode,seed){const b=build(mode,seed);D=b.rows;CATS=b.names;S={mode,...b,pos:0,res:Array(8).fill(null),dots:[],moves:[],score:0,joker:b.p,perf:perfect(b.q,b.p)};document.body.className=mode;draw()}
+function nxt(){const n=new Date(),x=new Date(n);x.setHours(24,0,0,0);const m=Math.floor((x-n)/6e4);return Math.floor(m/60)+"h "+m%60+"min"}
+let AC;function snd(r){if(ls("wr_snd")===0)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type="triangle";o.frequency.value=r<=15?880:r<=50?560:220;g.gain.value=.08;o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+.15)}catch(e){}}
+function vib(r){if(ls("wr_vib")!==0)try{navigator.vibrate&&navigator.vibrate(r<=15?15:r<=50?[10,30,10]:45)}catch(e){}}
+function confetti(){for(let i=0;i<30;i++){const e=document.createElement("i");e.className="cf";e.textContent=["🎉","✨","⭐","🌍"][i%4];e.style.cssText=`left:${Math.random()*100}vw;animation-delay:${Math.random()*.6}s`;document.body.appendChild(e);setTimeout(()=>e.remove(),3300)}}
+function how(){const o=document.createElement("div");o.className="ov";o.innerHTML=`<div class="md"><h2>Comment jouer ?</h2><p>1️⃣ Un pays apparaît.</p><p>2️⃣ Choisis une catégorie : son <b>rang mondial</b> devient tes points.</p><p>3️⃣ Chaque catégorie ne sert qu'<b>une fois</b> : garde les plus « dures » pour les pays qui y sont mal classés.</p><p>4️⃣ Tu peux <b>passer</b> un pays. Vise le score le plus <b>bas</b> 🎯</p><button class="btn" id="ok">C'est parti</button></div>`;document.body.appendChild(o);o.querySelector("#ok").onclick=()=>{ls("wr_seen",1);o.remove()}}
+function duels(head){app.innerHTML=head+`<div class="sec"><b>DUELS ENTRE AMIS</b><p class="mu">Crée un plateau et partage le code : ton ami joue exactement les mêmes pays, puis vous comparez vos scores.</p><button class="btn" onclick="start('duel',Math.random().toString(36).slice(2,7).toUpperCase())">⚔️ Créer un duel</button><button class="btn s" onclick="joinDuel()">🔑 Rejoindre avec un code</button><p class="mu" style="font-size:12px">Jouez avec la même difficulté (Normal / Facile) pour comparer.</p></div>`+nav("d")}
+function joinDuel(){const c=(prompt("Code du duel :")||"").trim().toUpperCase();if(c)start("duel",c)}
+function rst(){try{localStorage.clear()}catch(e){}home()}
+function sets(head){const on=k=>ls(k)!==0,row=(l,k)=>`<div><span>${l}</span><button class="go" onclick="ls('${k}',${on(k)?0:1});home('s')">${on(k)?"Activé":"Coupé"}</button></div>`;
+ app.innerHTML=head+`<div class="sec"><b>RÉGLAGES</b><div class="log">${row("🔊 Sons","wr_snd")}${row("📳 Vibrations","wr_vib")}</div><button class="btn s" onclick="how()">❓ Comment jouer</button><button class="btn s" onclick="if(confirm('Effacer toute ta progression ?'))rst()">🗑️ Réinitialiser mes données</button></div>`+nav("s")}
+function tick(){clearInterval(S.t);if(S.mode!=="blitz")return;let l=8;const b=document.getElementById("tbar");
+ S.t=setInterval(()=>{l-=.1;if(b)b.style.width=l/8*100+"%";if(l<=0){clearInterval(S.t);const f=S.ord.filter(i=>!S.res[i]);toast("Temps écoulé !");pick(f[Math.floor(Math.random()*f.length)])}},100)}
+function draw(){
+ const c=D[S.q[S.pos]],n=S.dots.length;
+ app.innerHTML=`<div class="top"><button class="back" onclick="home()">←</button><div class="lg">🌍<em>${LB[S.mode]}</em></div><div class="tot"><small>TOTAL</small><b class="${S.rv?"pop":""}">${n?S.score:"–"}</b>
+ <div class="dots">${Array.from({length:8},(_,i)=>`<i class="${i===n?"cur":""}" style="${S.dots[i]?`background:${col(S.dots[i])}`:""}"></i>`).join("")}<span style="margin-left:6px">${Math.min(n+1,8)}/8</span></div></div>
+ <div class="tools"><button onclick="how()">?</button><button onclick="start('${S.mode}',${S.seed?`'${S.seed}'`:"0"})">↺</button></div></div>
+ ${S.mode==="blitz"?'<div class="tb"><i id="tbar"></i></div>':""}
+ <div class="gc"><div class="cn"><div class="f">${c[1]}</div><div class="n">${c[0].toUpperCase()}</div>${S.rv?`<div class="rv" style="color:${col(S.rv)}">#${S.rv}</div>`:""}
+ <button class="pass" ${S.joker<1||S.lock?"disabled":""} onclick="pass()">⏭<br>PASSER<b>${S.joker}</b></button></div>
+ ${S.ord.map(i=>{const r=S.res[i];return r?`<div class="cat u ${S.last===i?"new":""}"><span>${CATS[i]}</span><span class="pill">${r.f}<b style="--c:${col(r.r)}">${r.r}</b></span></div>`:`<button class="cat" ${S.lock?"disabled":""} onclick="pick(${i})">${CATS[i]}</button>`}).join("")}</div>`;
+ if(!S.rv)tick()}
+function pick(i){if(S.lock||S.res[i])return;clearInterval(S.t);const G=S,k=S.pos,c=D[S.q[k]],r=c[2+i];
+ S.res[i]={f:c[1],n:c[0],r};S.moves[k]=i;S.dots.push(r);S.score+=r;S.lock=1;S.rv=r;S.last=i;snd(r);vib(r);draw();
+ setTimeout(()=>{if(S!==G)return;S.lock=0;S.rv=0;S.pos++;S.dots.length===8?end():draw()},800)}
+function pass(){if(S.lock||S.joker<1)return;S.joker--;S.moves[S.pos]=-1;S.pos++;draw()}
+function end(){
+ const d=today(),h=ls("wr_hist")||[];h.push({d,m:S.mode,s:S.score});ls("wr_hist",h.slice(-50));
+ if(S.mode==="daily"){const b=ls("wr_best_"+d);if(b==null||S.score<b)ls("wr_best_"+d,S.score);const ds=ls("wr_days")||[];if(!ds.includes(d)){ds.push(d);ls("wr_days",ds.slice(-60))}}
+ const pl=plan(S.q,S.p),ra=S.perf/S.score,g=ra>=.95?["S","Parfait !"]:ra>=.85?["A","Excellent"]:ra>=.7?["B","Très bien"]:ra>=.55?["C","Pas mal"]:["D","À retenter"];
+ const tag=S.mode==="daily"?d:S.mode==="duel"?"⚔️ code "+S.seed:"("+LB[S.mode].toLowerCase()+")";
+ S.share=`WorldRank ${tag} 🌍${S.p>1?" (facile)":""}\nScore : ${S.score} · parfait : ${S.perf} · note ${g[0]}\n${S.dots.map(sq).join("")}\n${S.mode==="duel"?"Bats-moi avec le code "+S.seed+" !":"Fais mieux !"}`;
+ const ic=i=>CATS[i].split(" ")[0],cell=(ci,m)=>m===undefined?"—":m<0?"⏭":ic(m)+" "+D[ci][2+m];
+ app.innerHTML=`<div class="top"><button class="back" onclick="home()">←</button><div class="tot"><small>SCORE FINAL</small><b>${S.score}</b><div>Parfait : ${S.perf} · écart +${S.score-S.perf}</div></div><div class="gr">${g[0]}</div></div>
+ <div class="gc"><div style="text-align:center;font-weight:800;color:#222">${g[1]}${S.mode==="daily"?` · prochain défi dans ${nxt()}`:""}</div>
+ <div class="log" style="color:#222">${S.ord.map(i=>{const r=S.res[i];return`<div><span>${r.f} ${r.n} · ${CATS[i]}</span><b style="color:${col(r.r)}">${r.r}</b></div>`}).join("")}</div>
+ <button class="btn s" style="color:#222" onclick="document.getElementById('bp').style.display='block';this.remove()">🔍 Voir le meilleur plateau</button>
+ <div id="bp" class="cmp" style="display:none;color:#222"><b>Toi vs idéal</b>${S.q.map((ci,k)=>`<div class="row" style="padding:5px 0;border-bottom:1px solid #eee"><span>${D[ci][1]} ${D[ci][0]}</span><span>${cell(ci,S.moves[k])} <small>→ idéal</small> <b>${cell(ci,pl.m[k]<0?-1:pl.m[k])}</b></span></div>`).join("")}</div>
+ <button class="btn" id="sh" onclick="share()">📤 Partager mon score</button>
+ <button class="btn s" style="color:#222" onclick="start('${S.mode==="daily"||S.mode==="weekly"||S.mode==="duel"?"free":S.mode}')">🎯 Rejouer</button></div>`;
+ if(ra>=.85)confetti()}
+async function share(){try{if(navigator.share){await navigator.share({text:S.share});return}}catch(e){}
+ try{await navigator.clipboard.writeText(S.share);document.getElementById("sh").textContent="✅ Copié !"}catch(e){prompt("Copie ton score :",S.share)}}
+home();if(!ls("wr_seen"))how();
+fetch("data.json").then(r=>r.ok?r.json():null).then(j=>{if(!j||!j.cats||!j.countries||j.cats.length<8)return;
+ ALLC=j.cats.map(c=>c.name);ALL=j.countries.map(c=>[c.n,c.f,...c.r]);if(!S.mode){home();toast(`Données chargées : ${ALL.length} pays · ${ALLC.length} catégories`)}}).catch(()=>{});
+</script></body></html>
